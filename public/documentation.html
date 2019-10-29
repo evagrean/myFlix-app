@@ -3,6 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <title>myFlix</title>
+    <style>
+      th,
+      td {
+        border: 1px solid black;
+        padding: 10px;
+      }
+    </style>
   </head>
   <body>
     <h1>Documentation</h1>
@@ -15,5 +22,173 @@
       layers) consists of a REST API and architected database built using
       JavaScript, Node.js, Express, and MongoDB.
     </p>
+    <h2>Movie requests</h2>
+    <table class="request-table" style="width: 100%;">
+      <thead>
+        <tr>
+          <th>Request</th>
+          <th>URL</th>
+          <th>HTTP Method</th>
+          <th>Request body data format</th>
+          <th>Response body data format</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Get a list of all movies</td>
+          <td>/movies</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>JSON object holding data about all movies</td>
+        </tr>
+        <tr>
+          <td>Get data about a single movie by title</td>
+          <td>/movies/[Title]</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>
+            JSON object holding data about a single movie, containing title,
+            description, genre, director, imageURL, featured or not. <br />
+            Example:<br />
+            {<br />
+            id: 1,<br />
+            title: "Bohemian Rhapsody",<br />
+            year: 2018,<br />
+            description: "Description about Bohemian Rhapsody",<br />
+            genre: {<br />
+            name: "biographical drama",<br />
+            description: "Description of biographical drama"<br />
+            },<br />
+            director: {<br />
+            name: "Bryan Singer",<br />
+            bio: "Bio of Bryan Singer",<br />
+            birth: "1965",<br />
+            death: ""<br />
+            },<br />
+            imageURL: "",<br />
+            featured: ""<br />
+            }
+          </td>
+        </tr>
+        <tr>
+          <td>Get data about a genre by name</td>
+          <td>/genres/[Name]</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>
+            A JSON object holding data about a movie genre containing name and
+            description.<br />
+            Example:<br />
+            {<br />
+            name: "comedy drama",<br />
+            description: "Description of comedy drama"<br />
+            }
+          </td>
+        </tr>
+        <tr>
+          <td>Get data about a director by name</td>
+          <td>/directors/[Name]</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>
+            JSON object holding data about a director, containing name, bio,
+            date of birth and death.<br />
+            Example:<br />
+            {<br />
+            name: "Bryan Singer",<br />
+            bio: "Bio of Bryan Singer",<br />
+            birth: "1965",<br />
+            death: ""<br />
+            }
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h2>User Requests</h2>
+    <table class="request-table" style="width: 100%;">
+      <thead>
+        <tr>
+          <th>Request</th>
+          <th>URL</th>
+          <th>HTTP Method</th>
+          <th>Request body data format</th>
+          <th>Response body data format</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Add a new user</td>
+          <td>/users</td>
+          <td>POST</td>
+          <td>
+            JSON object holding data about a user, structured like:<br />
+            {<br />
+            username: "Polly Pocket",<br />
+            password: "",<br />
+            email: "polly@pocket.com",<br />
+            birthday: ""<br />
+            }
+          </td>
+          <td>
+            JSON object holding data about the user that was added, including an
+            ID.<br />
+            Example<br />
+            {<br />
+            id: 1,<br />
+            username: "Polly Pocket",<br />
+            password: "",<br />
+            email: "polly@pocket.com",<br />
+            birthday: ""<br />
+            }
+          </td>
+        </tr>
+        <tr>
+          <td>Update user information by username</td>
+          <td>/users/[Username]</td>
+          <td>PUT</td>
+          <td>
+            JSON object holding data to be updated, structured like:<br />
+            {<br />
+            id: 1,<br />
+            username: "Polly Pocket",<br />
+            password: "",<br />
+            email: "polly@pocket.com",<br />
+            birthday: ""<br />
+            }
+          </td>
+          <td>A text message indicating the user's information was updated</td>
+        </tr>
+        <tr>
+          <td>Add a movie to list of favorites by ID</td>
+          <td>/users/[Username]/movies/[MovieID]</td>
+          <td>POST</td>
+          <td>None</td>
+          <td>
+            A text message indicating the movie was added to the list of
+            favorites
+          </td>
+        </tr>
+        <tr>
+          <td>Remove a movie from the list of favorites by movieID</td>
+          <td>/users/[Username]/movies/[MovieID]</td>
+          <td>DELETE</td>
+          <td>None</td>
+          <td>
+            A text message indicating whether the movie was successfully
+            removed.
+          </td>
+        </tr>
+        <tr>
+          <td>Remove user account by userID</td>
+          <td>/users/[UserID]</td>
+          <td>DELETE</td>
+          <td>None</td>
+          <td>
+            A text message indicating whether the user account was successfully
+            deleted.
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </body>
 </html>
