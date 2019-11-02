@@ -51,55 +51,73 @@
             description, genre, director, imageURL, featured or not. <br />
             Example:<br />
             {<br />
-            id: 1,<br />
-            title: "Bohemian Rhapsody",<br />
-            year: 2018,<br />
-            description: "Description about Bohemian Rhapsody",<br />
-            genre: {<br />
-            name: "biographical drama",<br />
-            description: "Description of biographical drama"<br />
+            _id: ObjectId("5dbc2d5e1c8922ba13eb0367"),<br />
+            Title: "Bohemian Rhapsody",<br />
+            ReleaseYear: "2018",<br />
+            Description: "A chronicle of the rock band Queen, who rose to fame
+            thanks to their revolutionary sound and the theatrics of their front
+            man, the iconic Freddie Mercury, culminating in their reunion for
+            the historic set they played at Live Aid in July 1985.",<br />
+            Genre: {<br />
+            Name: "Musical Drama",<br />
+            Description: "This movie type features a dramatic plot with a strong
+            musical presence. Often concerning people connected to the
+            entertainment business in some form, the soundtrack is often used to
+            comment or illustrate on the mood of the characters."<br />
             },<br />
-            director: {<br />
-            name: "Bryan Singer",<br />
-            bio: "Bio of Bryan Singer",<br />
-            birth: "1965",<br />
-            death: ""<br />
+            Director: {<br />
+            Name: "Brian Singer",<br />
+            Bio: "Hailed as one of the film industry`s most exciting and
+            provocative new talents after the huge success of The Usual Suspects
+            (1995), director Bryan Singer has built his reputation on making
+            films that are essentially lengthy, verbally dexterous flirtations
+            with the darker side of human nature.",<br />
+            Birth: "1965",<br />
+            Death: null<br />
             },<br />
-            imageURL: "",<br />
-            featured: ""<br />
-            }
+            ImagePath:
+            "https://www.allmovie.com/movie/bohemian-rhapsody-v670695",<br />
+            Featured: true<br />
+            }<br />
           </td>
         </tr>
         <tr>
           <td>Get data about a genre by name</td>
-          <td>/genres/[Name]</td>
+          <td>/movies/genre/[Name]</td>
           <td>GET</td>
           <td>None</td>
           <td>
             A JSON object holding data about a movie genre containing name and
             description.<br />
             Example:<br />
-            {<br />
-            name: "comedy drama",<br />
-            description: "Description of comedy drama"<br />
-            }
+            Genre: {<br />
+            Name: "Musical Drama",<br />
+            Description: "This movie type features a dramatic plot with a strong
+            musical presence. Often concerning people connected to the
+            entertainment business in some form, the soundtrack is often used to
+            comment or illustrate on the mood of the characters."<br />
+            },<br />
           </td>
         </tr>
         <tr>
           <td>Get data about a director by name</td>
-          <td>/directors/[Name]</td>
+          <td>/movies/director/[Name]</td>
           <td>GET</td>
           <td>None</td>
           <td>
             JSON object holding data about a director, containing name, bio,
             date of birth and death.<br />
             Example:<br />
-            {<br />
-            name: "Bryan Singer",<br />
-            bio: "Bio of Bryan Singer",<br />
-            birth: "1965",<br />
-            death: ""<br />
-            }
+            Director: {<br />
+            Name: "Brian Singer",<br />
+            Bio: "Hailed as one of the film industry`s most exciting and
+            provocative new talents after the huge success of The Usual Suspects
+            (1995), director Bryan Singer has built his reputation on making
+            films that are essentially lengthy, verbally dexterous flirtations
+            with the darker side of human nature.",<br />
+            Birth: "1965",<br />
+            Death: null<br />
+            },<br />
           </td>
         </tr>
       </tbody>
@@ -134,11 +152,13 @@
             ID.<br />
             Example<br />
             {<br />
-            id: 1,<br />
-            username: "Polly Pocket",<br />
-            password: "",<br />
-            email: "polly@pocket.com",<br />
-            birthday: ""<br />
+            _id: ObjectId("5dbc853bc1b53da3c6d82d14"),<br />
+            Username: "zekhy",<br />
+            Password: "k6m6QGy",<br />
+            Email: "mister@yahoo.com",<br />
+            Birthday: new Date("1979-02-18"),<br />
+            Favorites: [{ _id : ObjectId("5dbc8030c1b53da3c6d82d10")}, { _id :
+            ObjectId("5dbc1d6e1c8922ba13eb0359")}]<br />
             }
           </td>
         </tr>
@@ -149,18 +169,20 @@
           <td>
             JSON object holding data to be updated, structured like:<br />
             {<br />
-            id: 1,<br />
-            username: "Polly Pocket",<br />
-            password: "",<br />
-            email: "polly@pocket.com",<br />
-            birthday: ""<br />
+            _id: ObjectId("5dbc853bc1b53da3c6d82d14"),<br />
+            Username: "zekhy",<br />
+            Password: "k6m6QGy",<br />
+            Email: "lady@yahoo.com",<br />
+            Birthday: new Date("1979-02-18"),<br />
+            Favorites: [{ _id : ObjectId("5dbc8030c1b53da3c6d82d10")}, { _id :
+            ObjectId("5dbc1d6e1c8922ba13eb0359")}]<br />
             }
           </td>
           <td>A text message indicating the user's information was updated</td>
         </tr>
         <tr>
           <td>Add a movie to list of favorites by ID</td>
-          <td>/users/[Username]/movies/[MovieID]</td>
+          <td>/users/[Username]/favorites/[MovieID]</td>
           <td>POST</td>
           <td>None</td>
           <td>
@@ -170,7 +192,7 @@
         </tr>
         <tr>
           <td>Remove a movie from the list of favorites by movieID</td>
-          <td>/users/[Username]/movies/[MovieID]</td>
+          <td>/users/[Username]/favorites/[MovieID]</td>
           <td>DELETE</td>
           <td>None</td>
           <td>
