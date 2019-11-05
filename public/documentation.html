@@ -101,7 +101,7 @@
         </tr>
         <tr>
           <td>Get data about a director by name</td>
-          <td>/movies/director/[Name]</td>
+          <td>/movies/directors/[Name]</td>
           <td>GET</td>
           <td>None</td>
           <td>
@@ -144,9 +144,8 @@
             Username: "zekhy",<br />
             Password: "k6m6QGy",<br />
             Email: "mister@yahoo.com",<br />
-            Birthday: new Date("1979-02-18"),<br />
-            Favorites: [{ _id : ObjectId("5dbc8030c1b53da3c6d82d10")}, { _id :
-            ObjectId("5dbc1d6e1c8922ba13eb0359")}]<br />
+            Birthday: "1979-02-18",<br />
+            Favorites: []<br />
             }
           </td>
           <td>
@@ -158,9 +157,8 @@
             Username: "zekhy",<br />
             Password: "k6m6QGy",<br />
             Email: "mister@yahoo.com",<br />
-            Birthday: new Date("1979-02-18"),<br />
-            Favorites: [{ _id : ObjectId("5dbc8030c1b53da3c6d82d10")}, { _id :
-            ObjectId("5dbc1d6e1c8922ba13eb0359")}]<br />
+            Birthday: "1979-02-18",<br />
+            Favorites: []<br />
             }
           </td>
         </tr>
@@ -171,20 +169,29 @@
           <td>
             JSON object holding data to be updated, structured like:<br />
             {<br />
-            _id: ObjectId("5dbc853bc1b53da3c6d82d14"),<br />
-            Username: "zekhy",<br />
-            Password: "k6m6QGy",<br />
-            Email: "lady@yahoo.com",<br />
-            Birthday: new Date("1979-02-18"),<br />
-            Favorites: [{ _id : ObjectId("5dbc8030c1b53da3c6d82d10")}, { _id :
-            ObjectId("5dbc1d6e1c8922ba13eb0359")}]<br />
+            Username: "Newzekhy",<br />
+            Password: "Newk6m6QGy",<br />
+            Email: "Newlady@yahoo.com",<br />
+            Birthday: "1979-02-18",<br />
+            Favorites: []<br />
             }
           </td>
-          <td>A text message indicating the user's information was updated</td>
+          <td>
+            JSON data holding updated user info.<br />
+            Example:<br />
+            {<br />
+            _id: ObjectId("5dbc853bc1b53da3c6d82d14")<br />
+            Username: "Newzekhy",<br />
+            Password: "Newk6m6QGy",<br />
+            Email: "Newlady@yahoo.com",<br />
+            Birthday: "1979-02-18",<br />
+            Favorites: []<br />
+            }
+          </td>
         </tr>
         <tr>
           <td>Add a movie to list of favorites by ID</td>
-          <td>/users/[Username]/favorites/[MovieID]</td>
+          <td>/users/[Username]/Movies/[MovieID]</td>
           <td>POST</td>
           <td>None</td>
           <td>
@@ -194,7 +201,7 @@
         </tr>
         <tr>
           <td>Remove a movie from the list of favorites by movieID</td>
-          <td>/users/[Username]/favorites/[MovieID]</td>
+          <td>/users/[Username]/Movies/[MovieID]</td>
           <td>DELETE</td>
           <td>None</td>
           <td>
