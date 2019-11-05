@@ -13,6 +13,8 @@ mongoose.connect('mongodb://localhost:27017/myFlixDB', {
   useUnifiedTopology: true
 });
 
+mongoose.set('useFindAndModify', false);
+
 // Morgan middleware library used to log all requests to the terminal
 app.use(morgan('common'));
 
@@ -218,14 +220,14 @@ app.post('/users/:Username/Movies/:MovieID', function(req, res) {
     function(err, updatedUser) {
       if (err) {
         console.error(err);
-        res.status(500).send('Error: ' + err);
+        res.status(500).send('Error' + err);
       } else {
         res
           .status(201)
           .send(
             req.params.MovieID +
-              ' was successfully added to the favorites of ' +
-              updatedUser.Username
+              ' successfully added to Favorites: ' +
+              updatedUser
           );
       }
     }
@@ -243,7 +245,7 @@ app.delete('users/:Username/Movies/:MovieID', function(req, res) {
         console.error(err);
         res.status(500).send('Error: ' + err);
       } else {
-        res.json(updatedUser);
+        res.status(200).send(updatedUser);
       }
     }
   );
