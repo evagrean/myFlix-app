@@ -230,54 +230,66 @@ app.put(
 );
 
 // Adds movie to list of favorites by MovieID
-app.post('/users/:Username/Movies/:MovieID', function(req, res) {
-  Users.findOneAndUpdate(
-    { Username: req.params.Username },
-    { $push: { Favorites: req.params.MovieID } },
-    { new: true },
-    function(err, updatedUser) {
-      if (err) {
-        console.error(err);
-        res.status(500).send('Error' + err);
-      } else {
-        res
-          .status(201)
-          .send(
-            'The movie with ID ' +
-              req.params.MovieID +
-              ' was successfully added to list of favorites' +
-              updatedUser
-          );
+app.post(
+  '/users/:Username/Movies/:MovieID',
+  passport.authenticate('jwt', { session: false }),
+  function(req, res) {
+    Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      { $push: { Favorites: req.params.MovieID } },
+      { new: true },
+      function(err, updatedUser) {
+        if (err) {
+          console.error(err);
+          res.status(500).send('Error' + err);
+        } else {
+          res
+            .status(201)
+            .send(
+              'The movie with ID ' +
+                req.params.MovieID +
+                ' was successfully added to list of favorites. ' +
+                'Favorites of ' +
+                updatedUser.Username +
+                ': ' +
+                updatedUser.Favorites
+            );
+        }
       }
-    }
-  );
-});
+    );
+  }
+);
 
 // Removes movie from list of favorites by ID
-app.delete('users/:Username/Movies/:MovieID', function(req, res) {
-  Users.findOneAndUpdate(
-    { Username: req.params.Username },
-    { $pull: { Favorites: req.params.MovieID } },
-    { new: true },
-    function(err, updatedUser) {
-      if (err) {
-        console.error(err);
-        res.status(500).send('Error: ' + err);
-      } else {
-        res
-          .status(200)
-          .send(
-            'The movie with ID ' +
-              req.params.MovieID +
-              ' was successfully deleted from the list of favorites of ' +
-              updatedUser.Username +
-              ': ' +
-              updatedUser.Favorites
-          );
+app.delete(
+  '/users/:Username/Movies/:MovieID',
+  passport.authenticate('jwt', { session: false }),
+  function(req, res) {
+    Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      { $pull: { Favorites: req.params.MovieID } },
+      { new: true },
+      function(err, updatedUser) {
+        if (err) {
+          console.error(err);
+          res.status(500).send('Error: ' + err);
+        } else {
+          res
+            .status(200)
+            .send(
+              'The movie with ID ' +
+                req.params.MovieID +
+                ' was successfully deleted from the list of favorites. ' +
+                'Favorites of ' +
+                updatedUser.Username +
+                ': ' +
+                updatedUser.Favorites
+            );
+        }
       }
-    }
-  );
-});
+    );
+  }
+);
 
 // Delete user by username
 app.delete(
