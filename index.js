@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const Models = require('./models.js');
 const passport = require('passport');
 require('./passport');
+const cors = require('cors');
+const { check, validationResult } = require('express-validator');
 
 // Initializing app variable
 const app = express();
@@ -17,6 +19,28 @@ mongoose.connect('mongodb://localhost:27017/myFlixDB', {
 });
 
 mongoose.set('useFindAndModify', false);
+
+// Specifies that app uses CORS - default: allows requests from all origins
+app.use(cors());
+
+// Allowing only certain origins to be given access
+var allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+
+app.use(
+  cors({
+    origin: function(origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        // if specific origin isn't found on list of allowed origins
+        var message =
+          'The CORS policy for this application does´nt allow acces from origin' +
+          origin;
+        return callback(new Error(message), false);
+      }
+      return callback(null, true);
+    }
+  })
+);
 
 // Morgan middleware library used to log all requests to the terminal
 app.use(morgan('common'));
@@ -124,8 +148,8 @@ USER Queries
 *************************************
 */
 
-// Adds a new user
-/* We'll expect JSON in this format
+/* Adds a new user, password hashed when user registers before being stored in db
+ We'll expect JSON in this format
 {
 ID : Integer,
 Username: String,
@@ -133,32 +157,53 @@ Password: String,
 Email: String,
 Birthday: Date
 }*/
-app.post('/users', function(req, res) {
-  Users.findOne({ Username: req.body.Username })
-    .then(function(user) {
-      if (user) {
-        return res.status(400).send(req.body.Username + ' already exists');
-      } else {
-        Users.create({
-          Username: req.body.Username,
-          Password: req.body.Password,
-          Email: req.body.Email,
-          Birthday: req.body.Birthday
-        })
-          .then(function(user) {
-            res.status(201).json(user);
+app.post(
+  '/users',
+  [
+    check('Username', 'Username is required').isLength({ min: 5 }),
+    check(
+      'Username',
+      'Username contains non alphanumeric characters - not allowed.'
+    ).isAlphanuneric(),
+    check('Password', 'Password is required')
+      .not()
+      .isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail()
+  ],
+  function(req, res) {
+    var errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
+    var hashedPassword = Users.hashPassword(req.body.Password);
+    Users.findOne({ Username: req.body.Username })
+      .then(function(user) {
+        if (user) {
+          return res.status(400).send(req.body.Username + ' already exists');
+        } else {
+          Users.create({
+            Username: req.body.Username,
+            Password: hashedPassword,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
           })
-          .catch(function(error) {
-            console.log(error);
-            res.status(500).send('Error: ' + error);
-          });
-      }
-    })
-    .catch(function(error) {
-      console.error(error);
-      res.status(500).send('Error: ' + error);
-    });
-});
+            .then(function(user) {
+              res.status(201).json(user);
+            })
+            .catch(function(error) {
+              console.log(error);
+              res.status(500).send('Error: ' + error);
+            });
+        }
+      })
+      .catch(function(error) {
+        console.error(error);
+        res.status(500).send('Error: ' + error);
+      });
+  }
+);
 
 // Get all users
 app.get('/users', passport.authenticate('jwt', { session: false }), function(
@@ -291,7 +336,7 @@ app.delete(
   }
 );
 
-// Delete user by username
+// Deletes user by username
 app.delete(
   '/users/:Username',
   passport.authenticate('jwt', { session: false }),
@@ -311,7 +356,8 @@ app.delete(
   }
 );
 
-// listen for requests
-app.listen(8080, function() {
-  console.log('Your app is listening on port 8080');
+// Listens for requests
+var port = process.env.PORT || 3000;
+app.listen(port, '0.0.0.0', function() {
+  console.log('Listening on Port 3000');
 });
