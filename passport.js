@@ -38,6 +38,11 @@ passport.use(
             message: 'Incorrect username or password'
           });
         }
+        // Validates any password a user enters when logging in
+        if (!user.validatePassword(password)) {
+          console.log('incorrect password');
+          return callback(null, false, { message: 'Incorrect password.' });
+        }
         // If there is a match, cb will be executed: this will be the login endpoint.
         console.log('finished');
         return callback(null, user);
