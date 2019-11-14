@@ -59,7 +59,8 @@ All packages available on npm.
 **Response body data format:** JSON object holding data about a single movie, containing title, description, genre, director, imageURL, featured or not. 
 Example:
 ```
-{   "id": "5dbc2d5e1c8922ba13eb0367",
+{   
+    "id": "5dbc2d5e1c8922ba13eb0367",
     "Title": "Bohemian Rhapsody",
     "ReleaseYear": "2018",
     "Description": "A chronicle of the rock band Queen, who rose to fame thanks to their revolutionary sound and the theatrics of their      front man, the iconic Freddie Mercury, culminating in their reunion for the historic set they played at Live Aid in July 1985.",
