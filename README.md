@@ -57,7 +57,8 @@ All packages available on npm.
 **Request body data format:** None
 
 **Response body data format:** JSON object holding data about a single movie, containing title, description, genre, director, imageURL, featured or not. 
-Example:
+
+**Response Example:**
 ```
 {   
     "id": "5dbc2d5e1c8922ba13eb0367",
@@ -77,5 +78,25 @@ Example:
     "Actors": [],    
     "ImagePath": "https://www.allmovie.com/movie/bohemian-rhapsody-v670695",
     "Featured": true
+}
+```
+
+### Get data about a genre by name
+
+**Endpoint:** /movies/genres/[Name]
+
+**Query Parameters:** [Name] of genre
+
+**HTTP Method:** GET
+
+**Request body data format:** None
+
+**Response body data format:** A JSON object holding data about a movie genre containing name and description.
+
+**Response Example:**
+```
+{
+    "Name": "Musical Drama",
+    "Description": "This movie type features a dramatic plot with a strong musical presence. Often concerning people connected to the entertainment business in some form, the soundtrack is often used to comment or illustrate on the mood of the characters."
 }
 ```
