@@ -66,15 +66,16 @@ Example:
     },
     "Director": {
         "Name": "Brian Singer",
-        "Bio": "Hailed as one of the film industry`s most exciting and provocative new talents after the huge success of The Usual Suspects (1995), director Bryan Singer has built his reputation on making films that are essentially lengthy, verbally dexterous flirtations with the darker side of human nature.",
+        "Bio": "Hailed as one of the film industry's most exciting and provocative new talents after the huge success of The Usual Suspects (1995), director Bryan Singer has built his reputation on making films that are essentially lengthy, verbally dexterous flirtations with the darker side of human nature.",
         "Birth": "1965",
         "Death": null
     },
     "Actors": [],
-    "_id": "5dbc2d5e1c8922ba13eb0367",
+    "id": "5dbc2d5e1c8922ba13eb0367",
     "Title": "Bohemian Rhapsody",
     "ReleaseYear": "2018",
     "Description": "A chronicle of the rock band Queen, who rose to fame thanks to their revolutionary sound and the theatrics of their front man, the iconic Freddie Mercury, culminating in their reunion for the historic set they played at Live Aid in July 1985.",
     "ImagePath": "https://www.allmovie.com/movie/bohemian-rhapsody-v670695",
     "Featured": true
-}`
+}
+`
