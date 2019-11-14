@@ -18,8 +18,6 @@ The REST API can be accessed via commonly used HTTP methods (GET, POST, PUT, DEL
 
 ## Dependencies
 
-All packages available on npm.
-
 * bcrypt
 * body-parser
 * cors
