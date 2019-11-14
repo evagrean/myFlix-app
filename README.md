@@ -39,7 +39,11 @@ All packages available on npm.
 ### Movie requests
 
 **Request:** Get a list of all movies
+
 **URL:** /movies
+
 **HTTP Method:** GET
+
 **Request body data format:** None
+
 **Response body data format:** JSON Object holding data about all movies
