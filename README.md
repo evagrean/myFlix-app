@@ -196,4 +196,95 @@ All packages available on npm.
 ```
 
 
+### Update user info by username
 
+**Endpoint:** /users/[Username]
+
+**Query Parameter:** [Username] of user
+
+**HTTP Method:** PUT
+
+**Request body data format:** JSON object holding data to be updated, structured like:
+
+**Request Example:**
+```
+{
+    "Username": "SuperMario123",
+    "Password": "getNewPassword",
+    "Email": "SuperMario123@gmail.com",
+    "Birthday": "1984-02-06T00:00:00.000Z"    
+}
+```
+
+**Response body data format:** JSON data holding updated user info.
+
+**Response Example:**
+```
+{
+    "Favorites": [
+        "5dbc29331c8922ba13eb0361",
+        "5dbc27dc1c8922ba13eb035f"
+    ],
+    "_id": "5dca6f0e309c02bd94b20429",
+    "Username": "SuperMario123",
+    "Password": "getNewPassword",
+    "Email": "SuperMario123@gmail.com",
+    "Birthday": "1984-02-06T00:00:00.000Z"
+}
+```
+
+
+### Add a movie to list of favorites by movie ID
+
+**Endpoint:** /users/[Username]/Movies/[MovieID]
+
+**Query Parameter:** [Username] of user and [MovieID]
+
+**HTTP Method:** POST
+
+**Request body data format:** None
+
+**Response body data format:** A text message indicating the movie was added to the list of favorites and the updated list of favorites.
+
+**Response Example:**
+```
+The movie with ID 5dbc2a891c8922ba13eb0363 was successfully added to list of favorites. Favorites of SuperMario123:
+5dbc29331c8922ba13eb0361,5dbc27dc1c8922ba13eb035f,5dbc2a891c8922ba13eb0363
+```
+
+
+### Delete a movie from list of favorites by movie ID
+
+**Endpoint:** /users/[Username]/Movies/[MovieID]
+
+**Query Parameter:** [Username] of user and [MovieID]
+
+**HTTP Method:** DELETE
+
+**Request body data format:** None
+
+**Response body data format:** A text message indicating whether the movie was successfully removed and the updated list of favorites.
+
+**Response Example:**
+```
+The movie with ID 5dbc2a891c8922ba13eb0363 was successfully deleted from the list of favorites. Favorites of
+SuperMario123: 5dbc29331c8922ba13eb0361,5dbc27dc1c8922ba13eb035f
+```
+
+
+### Delete user by username
+
+**Endpoint:** /users/[Username]
+
+**Query Parameter:** [Username] of user
+
+**HTTP Method:** DELETE
+
+**Request body data format:** None
+
+**Response body data format:** A text message indicating whether the user account was successfully deleted.
+
+**Response Example:**
+```
+superHero was deleted
+```
