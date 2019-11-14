@@ -60,9 +60,13 @@ All packages available on npm.
 Example:
 `
 {
+
     "Genre": {
+    
         "Name": "Musical Drama",
+        
         "Description": "This movie type features a dramatic plot with a strong musical presence. Often concerning people connected to the entertainment business in some form, the soundtrack is often used to comment or illustrate on the mood of the characters."
+        
     },
     "Director": {
         "Name": "Brian Singer",
