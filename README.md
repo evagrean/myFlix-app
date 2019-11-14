@@ -35,10 +35,7 @@ All packages available on npm.
 
 ## Endpoints
 
-
-### Movie requests
-
-#### Get a list of all movies
+### Get a list of all movies
 
 **Endpoint:** /movies
 
@@ -49,7 +46,7 @@ All packages available on npm.
 **Response body data format:** JSON Object holding data about all movies
 
 
-#### Get data about a single movie by title
+### Get data about a single movie by title
 
 **Endpoint:** /movies/[Title]
 
@@ -61,6 +58,7 @@ All packages available on npm.
 
 **Response body data format:** JSON object holding data about a single movie, containing title, description, genre, director, imageURL, featured or not. 
 Example:
+
 {
     "Genre": {
         "Name": "Musical Drama",
