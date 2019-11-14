@@ -100,3 +100,100 @@ All packages available on npm.
     "Description": "This movie type features a dramatic plot with a strong musical presence. Often concerning people connected to the entertainment business in some form, the soundtrack is often used to comment or illustrate on the mood of the characters."
 }
 ```
+
+
+### Get data about a director by name
+
+**Endpoint:** /movies/directors/[Name]
+
+**Query Parameters:** [Name] of director
+
+**HTTP Method:** GET
+
+**Request body data format:** None
+
+**Response body data format:** JSON object holding data about a director, containing name, bio, date of birth and death if existing.
+
+**Response Example:**
+```
+{
+    "Name": "Sofia Coppola",
+    "Bio": "The daughter of filmmakers Eleanor and Francis Ford Coppola, she made her film debut as an infant in her father`s acclaimed crime drama film, The Godfather (1972). Coppola later appeared in a supporting role in Peggy Sue Got Married (1986) and portrayed Mary Corleone, the daughter of Michael Corleone, in The Godfather Part III (1990). Her performance in the latter was severely criticised, and she turned her attention to filmmaking.",
+    "Birth": "1971",
+    "Death": null
+}
+```
+
+
+### Get a list of all users
+
+**Endpoint:** /users
+
+**HTTP Method:** GET
+
+**Request body data format:** None
+
+**Response body data format:** JSON object holding data about all users.
+
+
+### Get a user by username
+
+**Endpoint:** /users/[Username]
+
+**Query Parameters:** [Username] of user
+
+**HTTP Method:** GET
+
+**Request body data format:** None
+
+**Response body data format:** JSON object holding data about a single user.
+
+**Response Example:**
+```
+{
+    "Favorites": [],
+    "_id": "5dcbfa7031b7860017f6ea43",
+    "Username": "Sammy123",
+    "Password": "$2b$10$Pewtk7wMnqGaKgiifUrBJ.IU/yUIIYZZTqpBFSWTluso7Oqp.eeU2",
+    "Email": "sammy123@gmail.com",
+    "Birthday": "1984-02-06T00:00:00.000Z",
+    "__v": 0
+}
+```
+
+
+### Add a new User
+
+**Endpoint:** /users
+
+**HTTP Method:** POST
+
+**Request body data format:** JSON object holding data about a user, structured like:
+
+**Request Example:**
+```
+{     
+        "Username": "Loreley",
+        "Password": "passit",
+        "Email": "lorymail@gmail.com",
+        "Birthday": "1984-02-06T00:00:00.000Z"       
+}
+```
+
+**Response body data format:** JSON object holding data about the user that was added, including an ID and a "Favorites" key.
+
+**Response Example:**
+```
+{
+    "Favorites": [],
+    "_id": "5dcd116a4aeeaa001759c134",
+    "Username": "Loreley",
+    "Password": "$2b$10$yLdpCBJOFrCgUsxe.b.BHO5XVpu3BaXwEDJKXKdZ3t0hU95Lg.AJ2",
+    "Email": "lorymail@gmail.com",
+    "Birthday": "1984-02-06T00:00:00.000Z",
+    "__v": 0
+}
+```
+
+
+
