@@ -34,7 +34,7 @@ mongoose.set('useFindAndModify', false);
 app.use(cors());
 
 // Allowing only certain origins to be given access
-var allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+var allowedOrigins = ['http://localhost:8080', 'http://localhost:1234'];
 
 app.use(
   cors({
