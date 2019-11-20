@@ -38,7 +38,7 @@ var allowedOrigins = ['http://localhost:8080', 'http://localhost:1234'];
 
 app.use(
   cors({
-    origin: function(origin, callback) {
+    origin: function (origin, callback) {
       if (!origin) return callback(null, true);
       if (allowedOrigins.indexOf(origin) === -1) {
         // if specific origin isn't found on list of allowed origins
@@ -65,7 +65,7 @@ const auth = require('./auth')(app);
 app.use(express.static('public'));
 
 // error-handling middleware function that logs application-level errors to terminal
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('An error occured');
 });
@@ -75,7 +75,7 @@ const Movies = Models.Movie;
 const Users = Models.User;
 
 // Returns the Homepage
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
   var responseText =
     'Welcome to the myFlix app. It provides information about movies.';
   res.send(responseText);
@@ -88,15 +88,15 @@ MOVIE Queries
 
 // Get all movies
 
-app.get('/movies', passport.authenticate('jwt', { session: false }), function(
+app.get('/movies', function (
   req,
   res
 ) {
   Movies.find()
-    .then(function(movies) {
+    .then(function (movies) {
       res.status(201).json(movies);
     })
-    .catch(function(err) {
+    .catch(function (err) {
       console.error(err);
       res.status(500).send('Error: ' + err);
     });
@@ -107,12 +107,12 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), function(
 app.get(
   '/movies/:Title',
   passport.authenticate('jwt', { session: false }),
-  function(req, res) {
+  function (req, res) {
     Movies.findOne({ Title: req.params.Title })
-      .then(function(movie) {
+      .then(function (movie) {
         res.json(movie);
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.error(err);
         res.status(500).send('Error: ' + err);
       });
@@ -124,12 +124,12 @@ app.get(
 app.get(
   '/movies/genres/:Name',
   passport.authenticate('jwt', { session: false }),
-  function(req, res) {
+  function (req, res) {
     Movies.findOne({ 'Genre.Name': req.params.Name })
-      .then(function(movie) {
+      .then(function (movie) {
         res.json(movie.Genre);
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.error(err);
         res.status(500).send('Error: ' + err);
       });
@@ -140,12 +140,12 @@ app.get(
 app.get(
   '/movies/directors/:Name',
   passport.authenticate('jwt', { session: false }),
-  function(req, res) {
+  function (req, res) {
     Movies.findOne({ 'Director.Name': req.params.Name })
-      .then(function(movie) {
+      .then(function (movie) {
         res.json(movie.Director);
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.error(err);
         res.status(500).send('Error: ' + err);
       });
@@ -180,7 +180,7 @@ app.post(
       .isEmpty(),
     check('Email', 'Email does not appear to be valid').isEmail()
   ],
-  function(req, res) {
+  function (req, res) {
     var errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -189,7 +189,7 @@ app.post(
 
     var hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({ Username: req.body.Username })
-      .then(function(user) {
+      .then(function (user) {
         if (user) {
           return res.status(400).send(req.body.Username + ' already exists');
         } else {
@@ -199,16 +199,16 @@ app.post(
             Email: req.body.Email,
             Birthday: req.body.Birthday
           })
-            .then(function(user) {
+            .then(function (user) {
               res.status(201).json(user);
             })
-            .catch(function(error) {
+            .catch(function (error) {
               console.log(error);
               res.status(500).send('Error: ' + error);
             });
         }
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.error(error);
         res.status(500).send('Error: ' + error);
       });
@@ -216,15 +216,15 @@ app.post(
 );
 
 // Get all users
-app.get('/users', passport.authenticate('jwt', { session: false }), function(
+app.get('/users', passport.authenticate('jwt', { session: false }), function (
   req,
   res
 ) {
   Users.find()
-    .then(function(users) {
+    .then(function (users) {
       res.status(201).json(users);
     })
-    .catch(function(err) {
+    .catch(function (err) {
       console.error(err);
       res.status(500).send('Error: ' + err);
     });
@@ -234,12 +234,12 @@ app.get('/users', passport.authenticate('jwt', { session: false }), function(
 app.get(
   '/users/:Username',
   passport.authenticate('jwt', { session: false }),
-  function(req, res) {
+  function (req, res) {
     Users.findOne({ Username: req.params.Username })
-      .then(function(user) {
+      .then(function (user) {
         res.json(user);
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.error(err);
         res.status(500).send('Error: ' + error);
       });
@@ -258,7 +258,7 @@ app.get(
 app.put(
   '/users/:Username',
   passport.authenticate('jwt', { session: false }),
-  function(req, res) {
+  function (req, res) {
     // Checks whether object with same username as indicated in the requestURL has been found
     Users.findOneAndUpdate(
       { Username: req.params.Username },
@@ -272,7 +272,7 @@ app.put(
       },
       // makes sure that the updated document is returned
       { new: true },
-      function(err, updatedUser) {
+      function (err, updatedUser) {
         if (err) {
           console.error(err);
           res.status(500).send('Error: ' + err);
@@ -288,12 +288,12 @@ app.put(
 app.post(
   '/users/:Username/Movies/:MovieID',
   passport.authenticate('jwt', { session: false }),
-  function(req, res) {
+  function (req, res) {
     Users.findOneAndUpdate(
       { Username: req.params.Username },
       { $push: { Favorites: req.params.MovieID } },
       { new: true },
-      function(err, updatedUser) {
+      function (err, updatedUser) {
         if (err) {
           console.error(err);
           res.status(500).send('Error' + err);
@@ -302,12 +302,12 @@ app.post(
             .status(201)
             .send(
               'The movie with ID ' +
-                req.params.MovieID +
-                ' was successfully added to list of favorites. ' +
-                'Favorites of ' +
-                updatedUser.Username +
-                ': ' +
-                updatedUser.Favorites
+              req.params.MovieID +
+              ' was successfully added to list of favorites. ' +
+              'Favorites of ' +
+              updatedUser.Username +
+              ': ' +
+              updatedUser.Favorites
             );
         }
       }
@@ -319,12 +319,12 @@ app.post(
 app.delete(
   '/users/:Username/Movies/:MovieID',
   passport.authenticate('jwt', { session: false }),
-  function(req, res) {
+  function (req, res) {
     Users.findOneAndUpdate(
       { Username: req.params.Username },
       { $pull: { Favorites: req.params.MovieID } },
       { new: true },
-      function(err, updatedUser) {
+      function (err, updatedUser) {
         if (err) {
           console.error(err);
           res.status(500).send('Error: ' + err);
@@ -333,12 +333,12 @@ app.delete(
             .status(200)
             .send(
               'The movie with ID ' +
-                req.params.MovieID +
-                ' was successfully deleted from the list of favorites. ' +
-                'Favorites of ' +
-                updatedUser.Username +
-                ': ' +
-                updatedUser.Favorites
+              req.params.MovieID +
+              ' was successfully deleted from the list of favorites. ' +
+              'Favorites of ' +
+              updatedUser.Username +
+              ': ' +
+              updatedUser.Favorites
             );
         }
       }
@@ -350,16 +350,16 @@ app.delete(
 app.delete(
   '/users/:Username',
   passport.authenticate('jwt', { session: false }),
-  function(req, res) {
+  function (req, res) {
     Users.findOneAndRemove({ Username: req.params.Username })
-      .then(function(user) {
+      .then(function (user) {
         if (!user) {
           res.status(400).send(req.params.Username + ' was not found.');
         } else {
           res.status(200).send(req.params.Username + ' was deleted.');
         }
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.error(err);
         res.status(400).send('Error: ' + err);
       });
@@ -368,6 +368,6 @@ app.delete(
 
 // Listens for requests
 var port = process.env.PORT || 3000;
-app.listen(port, '0.0.0.0', function() {
+app.listen(port, '0.0.0.0', function () {
   console.log('Listening on Port 3000');
 });
