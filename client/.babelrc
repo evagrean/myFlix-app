@@ -1,0 +1,13 @@
+/* 
+.babelrc tells Babel that it will find ES2015+ files (preset "env") and React´s JSX files (preset "react") to transpile. 
+"transform-class-properties" plugin allows to add methods to React components as arrow functions.
+*/
+{
+  "presets": [
+    "env",
+    "react"
+  ],
+  "plugins": [
+    "transform-class-properties"
+  ]
+}
