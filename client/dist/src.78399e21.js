@@ -38964,6 +38964,8 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _Media = _interopRequireDefault(require("react-bootstrap/Media"));
 
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -39005,21 +39007,29 @@ function (_React$Component) {
       console.log(this.props);
       var _this$props = this.props,
           movie = _this$props.movie,
-          onClick = _this$props.onClick;
+          _onClick = _this$props.onClick;
       if (!movie) return null;
       return _react.default.createElement("div", {
         className: "movie-view"
-      }, _react.default.createElement(_Media.default, null, _react.default.createElement(_Media.default.Body, null, _react.default.createElement("h5", null, movie.Title), _react.default.createElement("h6", {
+      }, _react.default.createElement(_Media.default, {
+        className: "d-flex flex-column flex-md-row align-items-center"
+      }, _react.default.createElement(_Media.default.Body, null, _react.default.createElement("h5", null, movie.Title), _react.default.createElement("h6", {
         className: "text-muted"
       }, "Genre: ", movie.Genre.Name), _react.default.createElement("h6", {
         className: "text-muted"
       }, "Director: ", movie.Director.Name), _react.default.createElement("p", null, movie.Description)), _react.default.createElement("img", {
         width: 220,
         height: 326,
-        className: "align-self-end ml-3",
+        className: "ml-3",
         src: movie.ImagePath,
         alt: "movie-poster placeholder"
-      })));
+      })), _react.default.createElement(_Button.default, {
+        variant: "primary",
+        className: "btn",
+        onClick: function onClick() {
+          return _onClick();
+        }
+      }, "Back to movie list"));
       {
         /* <img className="movie-poster" src={movie.ImagePath} />
          <div className="movie-title">
@@ -39063,7 +39073,7 @@ MovieView.propTypes = {
   }).isRequired,
   onClick: _propTypes.default.func.isRequired
 };
-},{"react":"../node_modules/react/index.js","../main-view/main-view":"components/main-view/main-view.jsx","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Media":"../node_modules/react-bootstrap/esm/Media.js"}],"components/main-view/main-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../main-view/main-view":"components/main-view/main-view.jsx","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Media":"../node_modules/react-bootstrap/esm/Media.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js"}],"components/main-view/main-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -39349,7 +39359,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49658" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50987" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

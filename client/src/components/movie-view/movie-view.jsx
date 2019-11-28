@@ -2,6 +2,7 @@ import React from 'react';
 import { MainView } from '../main-view/main-view';
 import PropTypes from 'prop-types';
 import Media from 'react-bootstrap/Media';
+import Button from 'react-bootstrap/Button';
 
 export class MovieView extends React.Component {
 
@@ -19,7 +20,7 @@ export class MovieView extends React.Component {
 
     return (
       <div className="movie-view">
-        <Media>
+        <Media className="d-flex flex-column flex-md-row align-items-center">
           <Media.Body>
             <h5>{movie.Title}</h5>
             <h6 className="text-muted">Genre: {movie.Genre.Name}</h6>
@@ -29,11 +30,12 @@ export class MovieView extends React.Component {
           <img
             width={220}
             height={326}
-            className="align-self-end ml-3"
+            className="ml-3"
             src={movie.ImagePath}
             alt="movie-poster placeholder"
           />
         </Media>
+        <Button variant="primary" className="btn" onClick={() => onClick()}>Back to movie list</Button>
       </div>
     );
 
