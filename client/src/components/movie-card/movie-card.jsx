@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 export class MovieCard extends React.Component {
   render() {
@@ -6,9 +9,26 @@ export class MovieCard extends React.Component {
     const { movie, onClick } = this.props;
 
     return (
-      <div onClick={() => onClick(movie)} className="movie-card">
-        {movie.Title}
-      </div>
+      <Card className="mb-3" style={{ width: '16rem' }} >
+        <Card.Img variant="top" src={movie.ImagePath} />
+        <Card.Body>
+          <Card.Title>{movie.Title}</Card.Title>
+          <Card.Text>{movie.Description}</Card.Text>
+          <Button onClick={() => onClick(movie)} variant="link">Read more</Button>
+        </Card.Body>
+      </Card>
     );
   }
 }
+
+/* static propTypes on MovieCard set to object 
+that contains special values provided as utilities by prop-types module.
+This values help specify how MovieCard's props should look*/
+MovieCard.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired
+  }).isRequired,
+  onClick: PropTypes.func.isRequired
+};

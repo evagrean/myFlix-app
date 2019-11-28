@@ -1,5 +1,19 @@
-.my-flix {
-  color: #FF69B4;
+body {
+  font-family: "Alegreya Sans", sans-serif;
+}
+
+.login-container {
+  margin-top: 100px;
+}
+
+/* .btn-primary {
+  background-color: $primary-color;
+} */
+.register-container {
+  margin-top: 100px;
+}
+body {
+  font-family: "Alegreya Sans", sans-serif;
 }
 
 /*# sourceMappingURL=/src.78399e21.css.map */
