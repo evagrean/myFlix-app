@@ -26,27 +26,33 @@ export function LoginView(props) {
 
   return (
     <div className="login-view">
-      <h1 className="mt-5 ml-5">Log in to myFlix</h1>
-      <Container className="login-container" style={{ width: '40%' }} >
-        <Form className="login-form">
-          <Form.Group controlId="formBasicUsername">
-            <Form.Label>Username</Form.Label>
-            <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} />
-          </Form.Group>
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
-          </Form.Group>
-          <Form.Row>
-            <Form.Group controlId="formGridButton">
-              <Button className="mr-1 btn-primary" variant="primary" type="submit" onClick={handleLogin}>Login</Button>
-            </Form.Group>
-            <Form.Group controlId="formGridButton">
-              <Button className="" variant="outline-primary" type="submit" onClick={() => props.onClick()}>Create new account</Button>
-            </Form.Group>
-          </Form.Row>
-        </Form>
-      </Container>
+      <Row className="justify-content-center">
+        <Col xs={10} sm={6} md={4}>
+          <Container className="container login-container border border-light rounded py-3 px-3">
+            <h3 className="pb-2">Log in to myFlix</h3>
+            <Form className="login-form">
+              <Form.Group controlId="formBasicUsername">
+                <Form.Label>Username</Form.Label>
+                <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} />
+              </Form.Group>
+              <Form.Group controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
+              </Form.Group>
+              <Row className="justify-content-end">
+                <Button className="btn-primary mr-3" variant="primary" type="submit" onClick={handleLogin}>Login</Button>
+              </Row>
+            </Form>
+          </Container>
+          <Container className="mt-4">
+            <Row className="d-flex align-items-center justify-content-center">
+              <span>Don't have an account?</span>
+              <Button variant="link" type="submit" onClick={() => props.onClick()}>Sign in</Button>
+            </Row>
+          </Container>
+        </Col>
+      </Row>
+
     </div >
   );
 }

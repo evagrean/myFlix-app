@@ -38463,14 +38463,17 @@ function LoginView(props) {
 
   return _react.default.createElement("div", {
     className: "login-view"
-  }, _react.default.createElement("h1", {
-    className: "mt-5 ml-5"
-  }, "Log in to myFlix"), _react.default.createElement(_Container.default, {
-    className: "login-container",
-    style: {
-      width: '40%'
-    }
-  }, _react.default.createElement(_Form.default, {
+  }, _react.default.createElement(_Row.default, {
+    className: "justify-content-center"
+  }, _react.default.createElement(_Col.default, {
+    xs: 10,
+    sm: 6,
+    md: 4
+  }, _react.default.createElement(_Container.default, {
+    className: "container login-container border border-light rounded py-3 px-3"
+  }, _react.default.createElement("h3", {
+    className: "pb-2"
+  }, "Log in to myFlix"), _react.default.createElement(_Form.default, {
     className: "login-form"
   }, _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicUsername"
@@ -38490,23 +38493,24 @@ function LoginView(props) {
     onChange: function onChange(e) {
       return setPassword(e.target.value);
     }
-  })), _react.default.createElement(_Form.default.Row, null, _react.default.createElement(_Form.default.Group, {
-    controlId: "formGridButton"
+  })), _react.default.createElement(_Row.default, {
+    className: "justify-content-end"
   }, _react.default.createElement(_Button.default, {
-    className: "mr-1 btn-primary",
+    className: "btn-primary mr-3",
     variant: "primary",
     type: "submit",
     onClick: handleLogin
-  }, "Login")), _react.default.createElement(_Form.default.Group, {
-    controlId: "formGridButton"
-  }, _react.default.createElement(_Button.default, {
-    className: "",
-    variant: "outline-primary",
+  }, "Login")))), _react.default.createElement(_Container.default, {
+    className: "mt-4"
+  }, _react.default.createElement(_Row.default, {
+    className: "d-flex align-items-center justify-content-center"
+  }, _react.default.createElement("span", null, "Don't have an account?"), _react.default.createElement(_Button.default, {
+    variant: "link",
     type: "submit",
     onClick: function onClick() {
       return props.onClick();
     }
-  }, "Create new account"))))));
+  }, "Sign in"))))));
 }
 
 LoginView.propTypes = {
@@ -38586,20 +38590,23 @@ function RegistrationView(props) {
 
   return _react.default.createElement("div", {
     className: "registration-view"
-  }, _react.default.createElement("h1", {
-    className: "mt-5 ml-5"
-  }, "Register for myFlix"), _react.default.createElement(_Container.default, {
-    className: "register-container",
-    style: {
-      width: '40%'
-    }
-  }, _react.default.createElement(_Form.default, {
-    className: "register-form"
+  }, _react.default.createElement(_Row.default, {
+    className: "justify-content-center"
+  }, _react.default.createElement(_Col.default, {
+    xs: 10,
+    sm: 6,
+    md: 4
+  }, _react.default.createElement(_Container.default, {
+    className: "container register-container border border-light rounded py-3 px-3"
+  }, _react.default.createElement("h3", {
+    className: "pb-2"
+  }, "Sign up for myFlix"), _react.default.createElement(_Form.default, {
+    className: "registration-form"
   }, _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicUsername"
   }, _react.default.createElement(_Form.default.Label, null, "Username"), _react.default.createElement(_Form.default.Control, {
     type: "text",
-    placeholder: "Enter a username",
+    placeholder: "Enter username",
     value: username,
     onChange: function onChange(e) {
       return createUsername(e.target.value);
@@ -38608,7 +38615,7 @@ function RegistrationView(props) {
     controlId: "formBasicPassword"
   }, _react.default.createElement(_Form.default.Label, null, "Password"), _react.default.createElement(_Form.default.Control, {
     type: "password",
-    placeholder: "Enter a password",
+    placeholder: "Enter password",
     value: password,
     onChange: function onChange(e) {
       return createPassword(e.target.value);
@@ -38631,32 +38638,24 @@ function RegistrationView(props) {
     onChange: function onChange(e) {
       return createBirthday(e.target.value);
     }
-  })), _react.default.createElement(_Form.default.Group, {
-    controlId: "formGridButton"
+  })), _react.default.createElement(_Row.default, {
+    className: "justify-content-end"
   }, _react.default.createElement(_Button.default, {
-    className: "mr-1",
+    className: "mr-3",
     variant: "primary",
     type: "submit",
     onClick: handleRegister
-  }, "Create account")), _react.default.createElement(_Form.default.Group, {
-    controlId: "formGridButton"
-  }, _react.default.createElement(_Form.default.Text, null, "Already have an account?"), _react.default.createElement(_Button.default, {
-    variant: "outline-primary",
+  }, "Sign in")))), _react.default.createElement(_Container.default, {
+    className: "mt-4"
+  }, _react.default.createElement(_Row.default, {
+    className: "d-flex align-items-center justify-content-center"
+  }, _react.default.createElement("span", null, "Already have an account?"), _react.default.createElement(_Button.default, {
+    variant: "link",
     type: "submit",
-    onClick: function (_onClick) {
-      function onClick() {
-        return _onClick.apply(this, arguments);
-      }
-
-      onClick.toString = function () {
-        return _onClick.toString();
-      };
-
-      return onClick;
-    }(function () {
-      return onClick();
-    })
-  }, "Login")))));
+    onClick: function onClick() {
+      return props.onClick();
+    }
+  }, "Login"))))));
 }
 
 RegistrationView.propTypes = {
@@ -39013,9 +39012,11 @@ function (_React$Component) {
         className: "movie-view"
       }, _react.default.createElement(_Media.default, {
         className: "d-flex flex-column flex-md-row align-items-center"
-      }, _react.default.createElement(_Media.default.Body, null, _react.default.createElement("h5", null, movie.Title), _react.default.createElement("h6", {
+      }, _react.default.createElement(_Media.default.Body, null, _react.default.createElement("h1", {
+        className: "display-4"
+      }, movie.Title), _react.default.createElement("h4", {
         className: "text-muted"
-      }, "Genre: ", movie.Genre.Name), _react.default.createElement("h6", {
+      }, "Genre: ", movie.Genre.Name), _react.default.createElement("h4", {
         className: "text-muted"
       }, "Director: ", movie.Director.Name), _react.default.createElement("p", null, movie.Description)), _react.default.createElement("img", {
         width: 220,
@@ -39241,7 +39242,7 @@ function (_React$Component) {
       }, _react.default.createElement("h1", {
         className: "mt-4 ml-5"
       }, "MyFlix"), _react.default.createElement(_Container.default, {
-        className: "mt-2"
+        className: "container-fluid"
       }, _react.default.createElement(_Row.default, null, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
         movie: selectedMovie,
         onClick: function onClick() {
@@ -39359,7 +39360,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50987" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62237" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

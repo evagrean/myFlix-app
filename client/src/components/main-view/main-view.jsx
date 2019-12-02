@@ -86,7 +86,7 @@ export class MainView extends React.Component {
     return (
       <div className="main-view">
         <h1 className="mt-4 ml-5">MyFlix</h1>
-        <Container className="mt-2">
+        <Container className="container-fluid">
           <Row>
             {selectedMovie
               ? <MovieView movie={selectedMovie} onClick={() => this.onMovieClick(null)} />

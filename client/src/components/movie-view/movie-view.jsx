@@ -22,9 +22,9 @@ export class MovieView extends React.Component {
       <div className="movie-view">
         <Media className="d-flex flex-column flex-md-row align-items-center">
           <Media.Body>
-            <h5>{movie.Title}</h5>
-            <h6 className="text-muted">Genre: {movie.Genre.Name}</h6>
-            <h6 className="text-muted">Director: {movie.Director.Name}</h6>
+            <h1 className="display-4">{movie.Title}</h1>
+            <h4 className="text-muted">Genre: {movie.Genre.Name}</h4>
+            <h4 className="text-muted">Director: {movie.Director.Name}</h4>
             <p>{movie.Description}</p>
           </Media.Body>
           <img

@@ -20,36 +20,43 @@ export function RegistrationView(props) {
   }
 
   return (
+
     <div className="registration-view">
-      <h1 className="mt-5 ml-5">Register for myFlix</h1>
-      <Container className="register-container" style={{ width: '40%' }}>
-        <Form className="register-form">
-          <Form.Group controlId="formBasicUsername">
-            <Form.Label>Username</Form.Label>
-            <Form.Control type="text" placeholder="Enter a username" value={username} onChange={e => createUsername(e.target.value)} />
-          </Form.Group>
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Enter a password" value={password} onChange={e => createPassword(e.target.value)} />
-          </Form.Group>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control type="text" placeholder="Enter your email adress" value={email} onChange={e => createEmail(e.target.value)} />
-          </Form.Group>
-          <Form.Group controlId="formBasicBirthday">
-            <Form.Label>Date of Birth</Form.Label>
-            <Form.Control type="date" placeholder="01/01/1980" value={birthday} onChange={e => createBirthday(e.target.value)} />
-          </Form.Group>
-          <Form.Group controlId="formGridButton">
-            <Button className="mr-1" variant="primary" type="submit" onClick={handleRegister}>Create account</Button>
-          </Form.Group>
-          <Form.Group controlId="formGridButton">
-            <Form.Text>Already have an account?</Form.Text>
-            <Button variant="outline-primary" type="submit" onClick={() => onClick()}>Login</Button>
-          </Form.Group>
-        </Form>
-      </Container>
-    </div>
+      <Row className="justify-content-center">
+        <Col xs={10} sm={6} md={4}>
+          <Container className="container register-container border border-light rounded py-3 px-3">
+            <h3 className="pb-2">Sign up for myFlix</h3>
+            <Form className="registration-form">
+              <Form.Group controlId="formBasicUsername">
+                <Form.Label>Username</Form.Label>
+                <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => createUsername(e.target.value)} />
+              </Form.Group>
+              <Form.Group controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Enter password" value={password} onChange={e => createPassword(e.target.value)} />
+              </Form.Group>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control type="text" placeholder="Enter your email adress" value={email} onChange={e => createEmail(e.target.value)} />
+              </Form.Group>
+              <Form.Group controlId="formBasicBirthday">
+                <Form.Label>Date of Birth</Form.Label>
+                <Form.Control type="date" placeholder="01/01/1980" value={birthday} onChange={e => createBirthday(e.target.value)} />
+              </Form.Group>
+              <Row className="justify-content-end">
+                <Button className="mr-3" variant="primary" type="submit" onClick={handleRegister}>Sign in</Button>
+              </Row>
+            </Form>
+          </Container>
+          <Container className="mt-4">
+            <Row className="d-flex align-items-center justify-content-center">
+              <span>Already have an account?</span>
+              <Button variant="link" type="submit" onClick={() => props.onClick()}>Login</Button>
+            </Row>
+          </Container>
+        </Col>
+      </Row>
+    </div >
 
   );
 }
