@@ -44,7 +44,7 @@ export function RegistrationView(props) {
                 <Form.Control type="date" placeholder="01/01/1980" value={birthday} onChange={e => createBirthday(e.target.value)} />
               </Form.Group>
               <Row className="justify-content-end">
-                <Button className="mr-3" variant="primary" type="submit" onClick={handleRegister}>Sign in</Button>
+                <Button className="mr-3" variant="primary" type="submit" onClick={handleRegister}>Sign up</Button>
               </Row>
             </Form>
           </Container>

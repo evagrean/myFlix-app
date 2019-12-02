@@ -47,7 +47,7 @@ export function LoginView(props) {
           <Container className="mt-4">
             <Row className="d-flex align-items-center justify-content-center">
               <span>Don't have an account?</span>
-              <Button variant="link" type="submit" onClick={() => props.onClick()}>Sign in</Button>
+              <Button variant="link" type="submit" onClick={() => props.onClick()}>Sign up</Button>
             </Row>
           </Container>
         </Col>

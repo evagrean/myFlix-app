@@ -14,7 +14,7 @@ export class MovieCard extends React.Component {
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
           <Card.Text className="d-block text-truncate line-clamp">{movie.Description}</Card.Text>
-          <Button className="justify-content-left" onClick={() => onClick(movie)} variant="link">Read more</Button>
+          <Button onClick={() => onClick(movie)} variant="link">Read more</Button>
         </Card.Body>
       </Card>
     );

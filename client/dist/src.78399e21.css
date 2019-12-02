@@ -8,6 +8,9 @@ body {
 .register-container {
   margin-top: 100px;
 }
+.card-margin {
+  margin-bottom: 10px;
+}
 body {
   font-family: "Alegreya Sans", sans-serif;
 }

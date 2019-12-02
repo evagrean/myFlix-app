@@ -20,12 +20,12 @@ export class MovieView extends React.Component {
 
     return (
       <div className="movie-view">
-        <Media className="d-flex flex-column flex-md-row align-items-center">
+        <Media className="d-flex flex-column flex-md-row align-items-center ml-xs-5">
           <Media.Body>
             <h1 className="display-4">{movie.Title}</h1>
             <h4 className="text-muted">Genre: {movie.Genre.Name}</h4>
-            <h4 className="text-muted">Director: {movie.Director.Name}</h4>
-            <p className="mt-2">{movie.Description}</p>
+            <h4 className="text-muted mb-3">Director: {movie.Director.Name}</h4>
+            <p>{movie.Description}</p>
           </Media.Body>
           <img
             width={220}

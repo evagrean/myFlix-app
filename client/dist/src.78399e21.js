@@ -38510,7 +38510,7 @@ function LoginView(props) {
     onClick: function onClick() {
       return props.onClick();
     }
-  }, "Sign in"))))));
+  }, "Sign up"))))));
 }
 
 LoginView.propTypes = {
@@ -38645,7 +38645,7 @@ function RegistrationView(props) {
     variant: "primary",
     type: "submit",
     onClick: handleRegister
-  }, "Sign in")))), _react.default.createElement(_Container.default, {
+  }, "Sign up")))), _react.default.createElement(_Container.default, {
     className: "mt-4"
   }, _react.default.createElement(_Row.default, {
     className: "d-flex align-items-center justify-content-center"
@@ -38885,7 +38885,6 @@ function (_React$Component) {
       }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, movie.Title), _react.default.createElement(_Card.default.Text, {
         className: "d-block text-truncate line-clamp"
       }, movie.Description), _react.default.createElement(_Button.default, {
-        className: "justify-content-left",
         onClick: function onClick() {
           return _onClick(movie);
         },
@@ -39014,16 +39013,14 @@ function (_React$Component) {
       return _react.default.createElement("div", {
         className: "movie-view"
       }, _react.default.createElement(_Media.default, {
-        className: "d-flex flex-column flex-md-row align-items-center"
+        className: "d-flex flex-column flex-md-row align-items-center ml-xs-5"
       }, _react.default.createElement(_Media.default.Body, null, _react.default.createElement("h1", {
         className: "display-4"
       }, movie.Title), _react.default.createElement("h4", {
         className: "text-muted"
       }, "Genre: ", movie.Genre.Name), _react.default.createElement("h4", {
-        className: "text-muted"
-      }, "Director: ", movie.Director.Name), _react.default.createElement("p", {
-        className: "mt-2"
-      }, movie.Description)), _react.default.createElement("img", {
+        className: "text-muted mb-3"
+      }, "Director: ", movie.Director.Name), _react.default.createElement("p", null, movie.Description)), _react.default.createElement("img", {
         width: 220,
         height: 326,
         className: "ml-3",
@@ -39259,7 +39256,8 @@ function (_React$Component) {
           xs: 12,
           sm: 6,
           md: 4,
-          lg: 3
+          lg: 3,
+          className: "card-margin"
         }, _react.default.createElement(_movieCard.MovieCard, {
           key: movie._id,
           movie: movie,
@@ -39365,7 +39363,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52186" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56449" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
