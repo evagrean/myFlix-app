@@ -9,12 +9,12 @@ export class MovieCard extends React.Component {
     const { movie, onClick } = this.props;
 
     return (
-      <Card className="mb-3" style={{ width: '16rem' }} >
+      <Card className="mb-3 h-100" style={{ width: '16rem' }} >
         <Card.Img variant="top" src={movie.ImagePath} />
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
-          <Card.Text>{movie.Description}</Card.Text>
-          <Button onClick={() => onClick(movie)} variant="link">Read more</Button>
+          <Card.Text className="d-block text-truncate line-clamp">{movie.Description}</Card.Text>
+          <Button className="justify-content-left" onClick={() => onClick(movie)} variant="link">Read more</Button>
         </Card.Body>
       </Card>
     );

@@ -25,7 +25,7 @@ export class MovieView extends React.Component {
             <h1 className="display-4">{movie.Title}</h1>
             <h4 className="text-muted">Genre: {movie.Genre.Name}</h4>
             <h4 className="text-muted">Director: {movie.Director.Name}</h4>
-            <p>{movie.Description}</p>
+            <p className="mt-2">{movie.Description}</p>
           </Media.Body>
           <img
             width={220}

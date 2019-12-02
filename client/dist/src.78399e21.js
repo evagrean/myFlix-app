@@ -38875,14 +38875,17 @@ function (_React$Component) {
           movie = _this$props.movie,
           _onClick = _this$props.onClick;
       return _react.default.createElement(_Card.default, {
-        className: "mb-3",
+        className: "mb-3 h-100",
         style: {
           width: '16rem'
         }
       }, _react.default.createElement(_Card.default.Img, {
         variant: "top",
         src: movie.ImagePath
-      }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, movie.Title), _react.default.createElement(_Card.default.Text, null, movie.Description), _react.default.createElement(_Button.default, {
+      }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, movie.Title), _react.default.createElement(_Card.default.Text, {
+        className: "d-block text-truncate line-clamp"
+      }, movie.Description), _react.default.createElement(_Button.default, {
+        className: "justify-content-left",
         onClick: function onClick() {
           return _onClick(movie);
         },
@@ -39018,7 +39021,9 @@ function (_React$Component) {
         className: "text-muted"
       }, "Genre: ", movie.Genre.Name), _react.default.createElement("h4", {
         className: "text-muted"
-      }, "Director: ", movie.Director.Name), _react.default.createElement("p", null, movie.Description)), _react.default.createElement("img", {
+      }, "Director: ", movie.Director.Name), _react.default.createElement("p", {
+        className: "mt-2"
+      }, movie.Description)), _react.default.createElement("img", {
         width: 220,
         height: 326,
         className: "ml-3",
@@ -39360,7 +39365,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62237" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52186" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
