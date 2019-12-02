@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
+
 export class MovieCard extends React.Component {
   render() {
     // This is given to the <MovieCard/> component by the outer world (in this case: `MainView, as this is what's connected to database via movies endpoint of API)
@@ -13,9 +14,11 @@ export class MovieCard extends React.Component {
         <Card.Img variant="top" src={movie.ImagePath} />
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
-          <Card.Text className="d-block text-truncate line-clamp">{movie.Description}</Card.Text>
-          <Button onClick={() => onClick(movie)} variant="link">Read more</Button>
+          <Card.Text>{movie.Description.substring(0, 90)}...</Card.Text>
         </Card.Body>
+        <Card.Footer>
+          <Button onClick={() => onClick(movie)} variant="link">Read more</Button>
+        </Card.Footer>
       </Card>
     );
   }

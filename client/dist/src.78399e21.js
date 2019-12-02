@@ -38882,9 +38882,7 @@ function (_React$Component) {
       }, _react.default.createElement(_Card.default.Img, {
         variant: "top",
         src: movie.ImagePath
-      }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, movie.Title), _react.default.createElement(_Card.default.Text, {
-        className: "d-block text-truncate line-clamp"
-      }, movie.Description), _react.default.createElement(_Button.default, {
+      }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, movie.Title), _react.default.createElement(_Card.default.Text, null, movie.Description.substring(0, 90), "...")), _react.default.createElement(_Card.default.Footer, null, _react.default.createElement(_Button.default, {
         onClick: function onClick() {
           return _onClick(movie);
         },
@@ -39363,7 +39361,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56449" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55773" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
