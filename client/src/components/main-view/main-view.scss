@@ -2,5 +2,13 @@ $primary-color: #8B0046;
 $font-family: 'Alegreya Sans', sans-serif;
 
 .card-margin {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.navbar-brand {
+  font-size: 30px;
+}
+
+.profile-button, .logout-button {
+  border-radius: 24px;
 }
