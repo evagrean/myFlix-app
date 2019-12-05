@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
@@ -15,44 +16,50 @@ export function LoginView(props) {
   const handleLogin = (e) => {
     // prevents the default refresh after submit button has been clicked
     e.preventDefault();
-    console.log(username, password);
-    /* Send a request to the server for authentication, 
-    then call props.onLoggedIn(username)
-    Allows a user to be automatically logged in, regardless of whether or not
-    they have correct credentials*/
-
-    props.onLoggedIn(username);
+    // Send a request to the server for authentication
+    axios.post('https://my-flix-evagrean.herokuapp.com/login', {
+      Username: username,
+      Password: password
+    })
+      .then(response => {
+        const data = response.data;
+        // This method triggers the onLoggedIn method in main-view.jsx
+        props.onLoggedIn(data);
+      })
+      .catch(error => {
+        console.log('no such user')
+        return alert('Invalid username or password. Please try again');
+      });
   };
 
   return (
     <div className="login-view">
       <Row className="justify-content-center">
-        <Col xs={10} sm={6} md={4}>
-          <Container className="container login-container border border-light rounded py-3 px-3">
+        <Col xs={11} sm={6} md={3}>
+          <Container className="container login-container border border-light shadow p-3 mb-5 rounded py-3 px-3">
             <h3 className="pb-2">Log in to myFlix</h3>
             <Form className="login-form">
               <Form.Group controlId="formBasicUsername">
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} />
+                <Form.Control type="text" placeholder="Enter username" required value={username} onChange={e => setUsername(e.target.value)} />
               </Form.Group>
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
+                <Form.Control type="password" placeholder="Enter password" required value={password} onChange={e => setPassword(e.target.value)} />
               </Form.Group>
               <Row className="justify-content-end">
-                <Button className="btn-primary mr-3" variant="primary" type="submit" onClick={handleLogin}>Login</Button>
+                <Button className="login-button mr-3 ml-3" variant="primary" type="submit" block onClick={handleLogin}>Login</Button>
               </Row>
             </Form>
           </Container>
           <Container className="mt-4">
             <Row className="d-flex align-items-center justify-content-center">
               <span>Don't have an account?</span>
-              <Button variant="link" type="submit" onClick={() => props.onClick()}>Sign up</Button>
+              <Button variant="link" size="lg" type="submit" onClick={() => props.onClick()}>Sign up</Button>
             </Row>
           </Container>
         </Col>
       </Row>
-
     </div >
   );
 }

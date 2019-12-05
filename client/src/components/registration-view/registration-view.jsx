@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
@@ -15,16 +16,29 @@ export function RegistrationView(props) {
 
   const handleRegister = () => {
     e.preventDefault();
-    console.log(username, password, email, birthday);
-    props.onLoggedIn(username);
-  }
+
+    axios.post('https://my-flix-evagrean.herokuapp.com/users', {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
+    })
+      .then(response => {
+        const data = response.data;
+        console.log(data);
+        window.open('/', '_self'); // with '_self' page will open in current tab
+      })
+      .catch(error => {
+        console.log('error registering user')
+        return alert('Oops. Please try again');
+      });
+  };
 
   return (
-
     <div className="registration-view">
       <Row className="justify-content-center">
-        <Col xs={10} sm={6} md={4}>
-          <Container className="container register-container border border-light rounded py-3 px-3">
+        <Col xs={11} sm={6} md={3}>
+          <Container className="container register-container border border-light shadow p-3 mb-5 rounded py-3 px-3">
             <h3 className="pb-2">Sign up for myFlix</h3>
             <Form className="registration-form">
               <Form.Group controlId="formBasicUsername">
@@ -44,14 +58,14 @@ export function RegistrationView(props) {
                 <Form.Control type="date" placeholder="01/01/1980" value={birthday} onChange={e => createBirthday(e.target.value)} />
               </Form.Group>
               <Row className="justify-content-end">
-                <Button className="mr-3" variant="primary" type="submit" onClick={handleRegister}>Sign up</Button>
+                <Button className="sign-up-button ml-3 mr-3" variant="primary" type="submit" block onClick={handleRegister}>Sign up</Button>
               </Row>
             </Form>
           </Container>
           <Container className="mt-4">
             <Row className="d-flex align-items-center justify-content-center">
               <span>Already have an account?</span>
-              <Button variant="link" type="submit" onClick={() => props.onClick()}>Login</Button>
+              <Button variant="link" size="lg" type="submit" onClick={() => props.onClick()}>Login</Button>
             </Row>
           </Container>
         </Col>
