@@ -16,7 +16,9 @@ export class MovieCard extends React.Component {
       <Card className="mb-3 h-100" style={{ width: '16rem' }} >
         <Card.Img variant="top" src={movie.ImagePath} />
         <Card.Body>
-          <Card.Title>{movie.Title}</Card.Title>
+          <Link className="text-muted" to={`/movies/${movie._id}`}>
+            <Card.Title>{movie.Title}</Card.Title>
+          </Link>
           <Card.Text>{movie.Description.substring(0, 90)}...</Card.Text>
         </Card.Body>
         <Card.Footer className="bg-white border-top-0">

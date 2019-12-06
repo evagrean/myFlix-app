@@ -19,21 +19,22 @@ export class DirectorView extends React.Component {
 
     if (!director) return null;
 
-    if (director.Death === null) return (
+    return (
       <div className="director-view">
         <Container>
           <Card style={{ width: '45rem' }} className="border-0 pl-0">
             <Card.Body>
-              <Card.Title className="display-4">{director.Name}</Card.Title>
+              <span className="d-flex align-items-center">
+                <Link to={`/`}>
+                  <i className="material-icons">arrow_back_ios</i>
+                </Link>
+                <h1 className="display-4">{director.Name}</h1>
+              </span>
               <Card.Subtitle className="mb-4 text-muted">
-                <h4>Born in {director.Birth}</h4>
+                {director.Death === null && <h4>Born in: {director.Birth}</h4>}
+                {director.Death !== null && <h4>{director.Birth}- {director.Death}</h4>}
               </Card.Subtitle>
-              <Card.Text>
-                {director.Bio}
-              </Card.Text>
-              <Link to={`/`}>
-                <Button variant="primary">Back to movie list</Button>
-              </Link>
+              <Card.Text>{director.Bio}</Card.Text>
             </Card.Body>
           </Card>
           <Container>
@@ -41,30 +42,6 @@ export class DirectorView extends React.Component {
           </Container>
         </Container>
 
-      </div>
-    );
-
-    if (director.Death !== null) return (
-      <div className="director-view">
-        <Container>
-          <Card style={{ width: '45rem' }} className="border-0 pl-0">
-            <Card.Body>
-              <Card.Title className="display-4">{director.Name}</Card.Title>
-              <Card.Subtitle className="mb-4 text-muted">
-                <h4>{director.Birth} - {director.Death}</h4>
-              </Card.Subtitle>
-              <Card.Text>
-                {director.Bio}
-              </Card.Text>
-              <Link to={`/`}>
-                <Button variant="primary">Back to movie list</Button>
-              </Link>
-            </Card.Body>
-          </Card>
-          <Container>
-            <h4 className="mt-4">Some movies from {director.Name}</h4>
-          </Container>
-        </Container>
       </div>
     );
   }

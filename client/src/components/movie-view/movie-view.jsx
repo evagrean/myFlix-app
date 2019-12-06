@@ -25,13 +25,26 @@ export class MovieView extends React.Component {
       <div className="movie-view">
         <Media className="d-flex flex-column flex-md-row align-items-center ml-xs-5">
           <Media.Body>
-            <h1 className="display-4">{movie.Title}</h1>
-            <Link to={`/genres/${movie.Genre.Name}`}>
-              <h4 className="genre-link text-muted mt-4">Genre: {movie.Genre.Name}</h4>
-            </Link>
-            <Link to={`/directors/${movie.Director.Name}`}>
-              <h4 className="director-link text-muted mb-4">Director: {movie.Director.Name}</h4>
-            </Link>
+            <span className="d-flex align-items-center">
+              <Link to={`/`}>
+                <i className="material-icons">arrow_back_ios</i>
+              </Link>
+              <h1 className="display-4">{movie.Title}</h1>
+            </span>
+            <span className="d-flex align-items-center">
+              <h4 className="text-muted mt-4 mr-2">Genre: </h4>
+              <Link to={`/genres/${movie.Genre.Name}`}>
+                <h4 className="genre-link link mt-4">{movie.Genre.Name}</h4>
+              </Link>
+            </span>
+            <span className="d-flex align-items-center mb-4">
+              <h4 className="text-muted mr-2">Director: </h4>
+              <Link to={`/directors/${movie.Director.Name}`}>
+                <h4 className="director-link link">{movie.Director.Name}</h4>
+              </Link>
+            </span>
+
+
             <p className="text-justify">{movie.Description}</p>
           </Media.Body>
           <img
@@ -42,10 +55,7 @@ export class MovieView extends React.Component {
             alt="movie-poster placeholder"
           />
         </Media>
-        <Link to={`/`}>
-          <Button variant="link" size="lg" className="pl-0">Back to movie list</Button>
-        </Link>
-      </div>
+      </div >
     );
   }
 }
