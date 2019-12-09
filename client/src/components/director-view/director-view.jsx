@@ -16,13 +16,16 @@ export class DirectorView extends React.Component {
 
   render() {
     const { director, movies } = this.props;
+    // testing which props are available
+    console.log(director);
+    console.log(movies);
 
     if (!director) return null;
 
     return (
       <div className="director-view">
         <Container>
-          <Card style={{ width: '45rem' }} className="border-0 pl-0">
+          <Card style={{ minwidth: '20rem' }} className="border-0 pl-0">
             <Card.Body>
               <span className="d-flex align-items-center">
                 <Link to={`/`}>
@@ -54,4 +57,6 @@ DirectorView.propTypes = {
     Birth: PropTypes.string,
     Death: PropTypes.string
   }).isRequired
+
+
 };
