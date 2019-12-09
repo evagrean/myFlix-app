@@ -1,4 +1,5 @@
-$primary-color: #8B0046;
+$primary-color: #522266;
+$secondary-color: #ececec;
 $font-family: 'Alegreya Sans', sans-serif;
 
 body {
@@ -13,6 +14,25 @@ body {
 #formBasicUsername, 
 #formBasicPassword {
   border-radius: 24px;
+  border-color: $primary-color;
+}
+
+.login-button {
+  background-color: $primary-color;
+}
+
+.login-button:hover {
+  background-color: lighten( $primary-color, 20% );
+  border-color: lighten( $primary-color, 20% );
+}
+
+
+.sign-up-link {
+  color: $primary-color;
+}
+
+.sign-up-link:hover {
+  color: lighten( $primary-color, 20% );
 }
 
 

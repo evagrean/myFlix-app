@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 // BrowserRouter used for implementing state-based routing
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { RouterLink } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -116,8 +118,10 @@ export class MainView extends React.Component {
             <Navbar.Brand href="http://localhost:1234/" className="navbar-brand">myFlix</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
-              <Button variant="outline-secondary mr-1" className="profile-button" onClick={() => { return <ProfileView /> }}>{user}'s Profile</Button>
-              <Button variant="outline-primary ml-1" className="logout-button" onClick={() => this.handleLogout()}>Log out</Button>
+              <Link component={RouterLink} to={`/users/${user}`} >
+                <Button variant="light mr-1" size="lg" className="profile-button">{user}'s Profile</Button>
+              </Link>
+              <Button variant="primary ml-1" size="lg" className="logout-button" onClick={() => this.handleLogout()}>Log out</Button>
             </Navbar.Collapse>
           </Navbar>
           <Container className="container-fluid">

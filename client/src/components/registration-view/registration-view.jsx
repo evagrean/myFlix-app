@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button'
@@ -65,7 +66,7 @@ export function RegistrationView(props) {
           <Container className="mt-4">
             <Row className="d-flex align-items-center justify-content-center">
               <span>Already have an account?</span>
-              <Button variant="link" size="lg" type="submit" onClick={() => props.onClick()}>Login</Button>
+              <Button variant="link" className="login-link btn-lg" type="submit" onClick={() => props.onClick()}>Login</Button>
             </Row>
           </Container>
         </Col>
@@ -82,3 +83,4 @@ RegistrationView.propTypes = {
   birthday: PropTypes.instanceOf(Date),
   onClick: PropTypes.func.isRequired
 }
+
