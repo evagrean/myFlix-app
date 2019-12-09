@@ -10,6 +10,24 @@ body {
 #formBasicUsername,
 #formBasicPassword {
   border-radius: 24px;
+  border-color: #522266;
+}
+
+.login-button {
+  background-color: #522266;
+}
+
+.login-button:hover {
+  background-color: #903cb3;
+  border-color: #903cb3;
+}
+
+.sign-up-link {
+  color: #522266;
+}
+
+.sign-up-link:hover {
+  color: #903cb3;
 }
 .register-container {
   margin-top: 100px;
@@ -21,6 +39,49 @@ body {
 #formBasicEmail,
 #formBasicBirthday {
   border-radius: 24px;
+  border-color: #522266;
+}
+
+.sign-up-button {
+  background-color: #522266;
+}
+
+.sign-up-button:hover {
+  background-color: #903cb3;
+  border-color: #903cb3;
+}
+
+.login-link {
+  color: #522266;
+}
+
+.login-link:hover {
+  color: #903cb3;
+}
+.read-more-link {
+  color: #522266;
+}
+
+.read-more-link:hover {
+  color: #903cb3;
+}
+.material-icons {
+  color: #e4ccee;
+}
+
+.material-icons:hover {
+  color: #522266;
+}
+
+.genre-link,
+.director-link {
+  color: #522266;
+}
+
+.genre-link:hover,
+.director-link:hover {
+  color: #903cb3;
+  text-decoration: none !important;
 }
 .card-margin {
   margin-bottom: 20px;
@@ -32,6 +93,25 @@ body {
 
 .profile-button, .logout-button {
   border-radius: 24px;
+}
+
+.logout-button {
+  background-color: #522266;
+  border-color: #522266;
+}
+
+.logout-button:hover {
+  background-color: #903cb3;
+  border-color: #903cb3;
+}
+
+.profile-button {
+  background-color: #ececec;
+  color: #522266;
+}
+
+.profile-button:hover {
+  color: #522266;
 }
 body {
   font-family: "Alegreya Sans", sans-serif;

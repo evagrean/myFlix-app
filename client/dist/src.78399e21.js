@@ -41404,6 +41404,8 @@ exports.LoginView = LoginView;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactRouterDom = require("react-router-dom");
+
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _axios = _interopRequireDefault(require("axios"));
@@ -41511,7 +41513,7 @@ function LoginView(props) {
     className: "d-flex align-items-center justify-content-center"
   }, _react.default.createElement("span", null, "Don't have an account?"), _react.default.createElement(_Button.default, {
     variant: "link",
-    size: "lg",
+    className: "sign-up-link btn-lg",
     type: "submit",
     onClick: function onClick() {
       return props.onClick();
@@ -41524,7 +41526,7 @@ LoginView.propTypes = {
   password: _propTypes.default.string.isRequired,
   onClick: _propTypes.default.func.isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","./login-view.scss":"components/login-view/login-view.scss"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","./login-view.scss":"components/login-view/login-view.scss"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -41538,6 +41540,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.RegistrationView = RegistrationView;
 
 var _react = _interopRequireWildcard(require("react"));
+
+var _reactRouterDom = require("react-router-dom");
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
@@ -41672,7 +41676,7 @@ function RegistrationView(props) {
     className: "d-flex align-items-center justify-content-center"
   }, _react.default.createElement("span", null, "Already have an account?"), _react.default.createElement(_Button.default, {
     variant: "link",
-    size: "lg",
+    className: "login-link btn-lg",
     type: "submit",
     onClick: function onClick() {
       return props.onClick();
@@ -41687,7 +41691,7 @@ RegistrationView.propTypes = {
   birthday: _propTypes.default.instanceOf(Date),
   onClick: _propTypes.default.func.isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"../node_modules/react-bootstrap/esm/divWithClassName.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"../node_modules/react-bootstrap/esm/divWithClassName.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41911,13 +41915,16 @@ function (_React$Component) {
       }, _react.default.createElement(_Card.default.Img, {
         variant: "top",
         src: movie.ImagePath
-      }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, movie.Title), _react.default.createElement(_Card.default.Text, null, movie.Description.substring(0, 90), "...")), _react.default.createElement(_Card.default.Footer, {
+      }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_reactRouterDom.Link, {
+        className: "text-muted",
+        to: "/movies/".concat(movie._id)
+      }, _react.default.createElement(_Card.default.Title, null, movie.Title)), _react.default.createElement(_Card.default.Text, null, movie.Description.substring(0, 90), "...")), _react.default.createElement(_Card.default.Footer, {
         className: "bg-white border-top-0"
       }, _react.default.createElement(_reactRouterDom.Link, {
         to: "/movies/".concat(movie._id)
       }, _react.default.createElement(_Button.default, {
         variant: "link",
-        className: "pl-0"
+        className: "read-more-link pl-0"
       }, "Read more"))));
     }
   }]);
@@ -42043,25 +42050,37 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       console.log(this.props);
-      var _this$props = this.props,
-          movie = _this$props.movie,
-          onClick = _this$props.onClick;
+      var movie = this.props.movie;
       if (!movie) return null;
       return _react.default.createElement("div", {
         className: "movie-view"
       }, _react.default.createElement(_Media.default, {
         className: "d-flex flex-column flex-md-row align-items-center ml-xs-5"
-      }, _react.default.createElement(_Media.default.Body, null, _react.default.createElement("h1", {
+      }, _react.default.createElement(_Media.default.Body, null, _react.default.createElement("span", {
+        className: "d-flex align-items-center"
+      }, _react.default.createElement(_reactRouterDom.Link, {
+        to: "/"
+      }, _react.default.createElement("i", {
+        className: "material-icons"
+      }, "arrow_back_ios")), _react.default.createElement("h1", {
         className: "display-4"
-      }, movie.Title), _react.default.createElement(_reactRouterDom.Link, {
+      }, movie.Title)), _react.default.createElement("span", {
+        className: "d-flex align-items-center"
+      }, _react.default.createElement("h4", {
+        className: "text-muted mt-4 mr-2"
+      }, "Genre: "), _react.default.createElement(_reactRouterDom.Link, {
         to: "/genres/".concat(movie.Genre.Name)
       }, _react.default.createElement("h4", {
-        className: "genre-link text-muted mt-4"
-      }, "Genre: ", movie.Genre.Name)), _react.default.createElement(_reactRouterDom.Link, {
+        className: "genre-link link mt-4"
+      }, movie.Genre.Name))), _react.default.createElement("span", {
+        className: "d-flex align-items-center mb-4"
+      }, _react.default.createElement("h4", {
+        className: "text-muted mr-2"
+      }, "Director: "), _react.default.createElement(_reactRouterDom.Link, {
         to: "/directors/".concat(movie.Director.Name)
       }, _react.default.createElement("h4", {
-        className: "director-link text-muted mb-4"
-      }, "Director: ", movie.Director.Name)), _react.default.createElement("p", {
+        className: "director-link link"
+      }, movie.Director.Name))), _react.default.createElement("p", {
         className: "text-justify"
       }, movie.Description)), _react.default.createElement("img", {
         width: 220,
@@ -42069,13 +42088,7 @@ function (_React$Component) {
         className: "ml-3",
         src: movie.ImagePath,
         alt: "movie-poster placeholder"
-      })), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/"
-      }, _react.default.createElement(_Button.default, {
-        variant: "link",
-        size: "lg",
-        className: "pl-0"
-      }, "Back to movie list")));
+      })));
     }
   }]);
 
@@ -42163,42 +42176,29 @@ function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           director = _this$props.director,
-          movies = _this$props.movies;
+          movies = _this$props.movies; // testing which props are available
+
+      console.log(director);
+      console.log(movies);
       if (!director) return null;
-      if (director.Death === null) return _react.default.createElement("div", {
+      return _react.default.createElement("div", {
         className: "director-view"
       }, _react.default.createElement(_Container.default, null, _react.default.createElement(_Card.default, {
         style: {
-          width: '45rem'
+          minwidth: '20rem'
         },
         className: "border-0 pl-0"
-      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, {
-        className: "display-4"
-      }, director.Name), _react.default.createElement(_Card.default.Subtitle, {
-        className: "mb-4 text-muted"
-      }, _react.default.createElement("h4", null, "Born in ", director.Birth)), _react.default.createElement(_Card.default.Text, null, director.Bio), _react.default.createElement(_reactRouterDom.Link, {
+      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement("span", {
+        className: "d-flex align-items-center"
+      }, _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
-      }, _react.default.createElement(_Button.default, {
-        variant: "primary"
-      }, "Back to movie list")))), _react.default.createElement(_Container.default, null, _react.default.createElement("h4", {
-        className: "mt-4"
-      }, "Some movies from ", director.Name))));
-      if (director.Death !== null) return _react.default.createElement("div", {
-        className: "director-view"
-      }, _react.default.createElement(_Container.default, null, _react.default.createElement(_Card.default, {
-        style: {
-          width: '45rem'
-        },
-        className: "border-0 pl-0"
-      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, {
+      }, _react.default.createElement("i", {
+        className: "material-icons"
+      }, "arrow_back_ios")), _react.default.createElement("h1", {
         className: "display-4"
-      }, director.Name), _react.default.createElement(_Card.default.Subtitle, {
+      }, director.Name)), _react.default.createElement(_Card.default.Subtitle, {
         className: "mb-4 text-muted"
-      }, _react.default.createElement("h4", null, director.Birth, " - ", director.Death)), _react.default.createElement(_Card.default.Text, null, director.Bio), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/"
-      }, _react.default.createElement(_Button.default, {
-        variant: "primary"
-      }, "Back to movie list")))), _react.default.createElement(_Container.default, null, _react.default.createElement("h4", {
+      }, director.Death === null && _react.default.createElement("h4", null, "Born in: ", director.Birth), director.Death !== null && _react.default.createElement("h4", null, director.Birth, "- ", director.Death)), _react.default.createElement(_Card.default.Text, null, director.Bio))), _react.default.createElement(_Container.default, null, _react.default.createElement("h4", {
         className: "mt-4"
       }, "Some movies from ", director.Name))));
     }
@@ -42281,24 +42281,25 @@ function (_React$Component) {
   _createClass(GenreView, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          genre = _this$props.genre,
-          movie = _this$props.movie;
+      var genre = this.props.genre;
+      console.log(this.props);
       if (!genre) return null;
       return _react.default.createElement("div", {
         className: "genre-view"
       }, _react.default.createElement(_Container.default, null, _react.default.createElement(_Card.default, {
         style: {
-          width: '45rem'
+          minwidth: '20rem'
         },
         className: "border-0 pl-0"
-      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, {
-        className: "display-4 mb-4"
-      }, genre.Name), _react.default.createElement(_Card.default.Text, null, genre.Description), _react.default.createElement(_reactRouterDom.Link, {
+      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement("span", {
+        className: "d-flex align-items-center mb-4"
+      }, _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
-      }, _react.default.createElement(_Button.default, {
-        variant: "primary"
-      }, "Back to movie list")))), _react.default.createElement(_Container.default, null, _react.default.createElement("h4", {
+      }, _react.default.createElement("i", {
+        className: "material-icons"
+      }, "arrow_back_ios")), _react.default.createElement("h1", {
+        className: "display-4"
+      }, genre.Name)), _react.default.createElement(_Card.default.Text, null, genre.Description))), _react.default.createElement(_Container.default, null, _react.default.createElement("h4", {
         className: "mt-4"
       }, "Some movies that belong to ", genre.Name))));
     }
@@ -52416,9 +52417,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ProfileView = void 0;
+exports.ProfileView = ProfileView;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -52428,131 +52429,53 @@ var _reactBootstrap = require("react-bootstrap");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function ProfileView(props) {
+  var profile = props.userObject; // const token = props.userObject.token;
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+  var _useState = (0, _react.useState)(profile.user.Username),
+      _useState2 = _slicedToArray(_useState, 2),
+      username = _useState2[0],
+      setUsername = _useState2[1];
 
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+  var _useState3 = (0, _react.useState)(profile.user.Password),
+      _useState4 = _slicedToArray(_useState3, 2),
+      password = _useState4[0],
+      setPassword = _useState4[1];
 
-var ProfileView =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(ProfileView, _React$Component);
+  var _useState5 = (0, _react.useState)(profile.user.Email),
+      _useState6 = _slicedToArray(_useState5, 2),
+      email = _useState6[0],
+      setEmail = _useState6[1];
 
-  function ProfileView() {
-    var _this;
+  var _useState7 = (0, _react.useState)(profile.user.Birthday),
+      _useState8 = _slicedToArray(_useState7, 2),
+      birthday = _useState8[0],
+      setBirthday = _useState8[1];
 
-    _classCallCheck(this, ProfileView);
+  var _useState9 = (0, _react.useState)(profile.user.Favorites),
+      _useState10 = _slicedToArray(_useState9, 2),
+      favorites = _useState10[0],
+      setFavorites = _useState10[1];
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileView).call(this));
-    _this.state = {
-      username: null,
-      password: null,
-      email: null,
-      birthday: null,
-      userData: null,
-      favorites: []
-    };
-    return _this;
-  }
-
-  _createClass(ProfileView, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      //authentication
-      var accessToken = localStorage.getItem('token');
-
-      if (accessToken !== null) {
-        this.getUser(accessToken);
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var username = this.state.username;
-      return _react.default.createElement("div", {
-        className: "profile-view"
-      }, _react.default.createElement("h1", {
-        className: "display-4"
-      }, "Profile"), _react.default.createElement(_reactBootstrap.Row, {
-        className: "justify-content-center"
-      }, _react.default.createElement(_reactBootstrap.Col, {
-        xs: 10,
-        sm: 6,
-        md: 4
-      }, _react.default.createElement(_reactBootstrap.Container, {
-        className: "container register-container border border-light rounded py-3 px-3"
-      }, _react.default.createElement(_reactBootstrap.Form, {
-        className: "registration-form"
-      }, _react.default.createElement(_reactBootstrap.Form.Group, {
-        controlId: "formBasicUsername"
-      }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Username"), _react.default.createElement(_reactBootstrap.Form.Control, {
-        type: "text",
-        placeholder: "Enter username",
-        value: username,
-        onChange: function onChange(e) {
-          return createUsername(e.target.value);
-        }
-      })), _react.default.createElement(_reactBootstrap.Form.Group, {
-        controlId: "formBasicPassword"
-      }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Password"), _react.default.createElement(_reactBootstrap.Form.Control, {
-        type: "password",
-        placeholder: "Enter password",
-        value: password,
-        onChange: function onChange(e) {
-          return createPassword(e.target.value);
-        }
-      })), _react.default.createElement(_reactBootstrap.Form.Group, {
-        controlId: "formBasicEmail"
-      }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Email"), _react.default.createElement(_reactBootstrap.Form.Control, {
-        type: "text",
-        placeholder: "Enter your email adress",
-        value: email,
-        onChange: function onChange(e) {
-          return createEmail(e.target.value);
-        }
-      })), _react.default.createElement(_reactBootstrap.Form.Group, {
-        controlId: "formBasicBirthday"
-      }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Date of Birth"), _react.default.createElement(_reactBootstrap.Form.Control, {
-        type: "date",
-        placeholder: "01/01/1980",
-        value: birthday,
-        onChange: function onChange(e) {
-          return createBirthday(e.target.value);
-        }
-      })), _react.default.createElement(_reactBootstrap.Row, {
-        className: "justify-content-end"
-      }, _react.default.createElement(_reactBootstrap.Button, {
-        className: "mr-3",
-        variant: "primary",
-        type: "submit"
-      }, "Update")))), _react.default.createElement(_reactBootstrap.Container, {
-        className: "mt-4"
-      }, _react.default.createElement(_reactBootstrap.Row, {
-        className: "d-flex align-items-center justify-content-center"
-      }, _react.default.createElement("span", null, "Want to delete your myFlix account?"), _react.default.createElement(_reactBootstrap.Button, {
-        variant: "link",
-        type: "submit"
-      }, "Unregister"))))), _react.default.createElement("h3", null, "My favorite movies"));
-    }
-  }]);
-
-  return ProfileView;
-}(_react.default.Component);
-
-exports.ProfileView = ProfileView;
+  console.log(props);
+  return _react.default.createElement("div", {
+    className: "profile-view"
+  }, _react.default.createElement("h1", {
+    className: "display-4"
+  }, "Profile"), _react.default.createElement("p", null, "Username: ", user.Username), _react.default.createElement("p", null, "Password: ", user.Password), _react.default.createElement("p", null, "Email: ", user.Email), _react.default.createElement("p", null, "Birthday: ", user.Birthday), _react.default.createElement("p", null, "Favorite Movies: ", user.Favorites));
+}
 },{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/main-view/main-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -52762,14 +52685,16 @@ function (_React$Component) {
       }), _react.default.createElement(_Navbar.default.Collapse, {
         className: "justify-content-end",
         id: "basic-navbar-nav"
+      }, _react.default.createElement(_reactRouterDom.Link, {
+        component: _reactRouterDom.RouterLink,
+        to: "/users/".concat(user)
       }, _react.default.createElement(_Button.default, {
-        variant: "outline-secondary mr-1",
-        className: "profile-button",
-        onClick: function onClick() {
-          return _react.default.createElement(_profileView.ProfileView, null);
-        }
-      }, user, "'s Profile"), _react.default.createElement(_Button.default, {
-        variant: "outline-primary ml-1",
+        variant: "light mr-1",
+        size: "lg",
+        className: "profile-button"
+      }, user, "'s Profile")), _react.default.createElement(_Button.default, {
+        variant: "primary ml-1",
+        size: "lg",
         className: "logout-button",
         onClick: function onClick() {
           return _this3.handleLogout();
@@ -52949,7 +52874,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64955" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58208" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
