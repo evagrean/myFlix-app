@@ -1,6 +1,24 @@
-$primary-color: #8B0046;
+$primary-color: #522266;
+$secondary-color: #ececec;
 $font-family: 'Alegreya Sans', sans-serif;
 
-.btn-back {
-  border-radius: 24px;
+.material-icons {
+  color: lighten($primary-color, 60%);
 }
+
+.material-icons:hover {
+  color: $primary-color;
+}
+
+.genre-link, 
+.director-link {
+  color: $primary-color;
+  
+}
+
+.genre-link:hover, 
+.director-link:hover {
+  color: lighten($primary-color, 20%);
+  text-decoration: none !important;
+}
+

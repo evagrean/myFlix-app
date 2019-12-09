@@ -1,5 +1,13 @@
-$primary-color: #8B0046;
+$primary-color: #522266;
 $font-family: 'Alegreya Sans', sans-serif;
+
+.read-more-link {
+  color: $primary-color;
+}
+
+.read-more-link:hover {
+  color: lighten( $primary-color, 20% );
+}
 
 
 
