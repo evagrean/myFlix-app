@@ -83,6 +83,63 @@ body {
   color: #903cb3;
   text-decoration: none !important;
 }
+
+.add-favorite {
+  background-color: #ececec;
+  color: #522266;
+  border-color: #ececec;
+  border-radius: 24px;
+}
+
+.add-favorite:hover {
+  color: #522266;
+  border-color: #ececec;
+  background-color: #b9b9b9;
+}
+
+.heart {
+  color: #522266;
+}
+.update-button {
+  background-color: #ececec;
+  border-color: #ececec;
+  color: #522266;
+  border-radius: 24px;
+}
+
+.update-button:hover {
+  background-color: #b9b9b9;
+  border-color: #b9b9b9;
+}
+
+.delete-button {
+  background-color: #522266;
+  border-color: #522266;
+  border-radius: 24px;
+}
+
+.delete-button:hover {
+  background-color: #903cb3;
+  border-color: #903cb3;
+}
+.update-btn {
+  background-color: #522266;
+  border-color: #522266;
+  border-radius: 24px;
+}
+
+.update-btn:hover {
+  background-color: #903cb3;
+  border-color: #903cb3;
+}
+
+.unregister-btn {
+  color: #522266;
+}
+
+.unregister-btn:hover {
+  color: #903cb3;
+}
 .card-margin {
   margin-bottom: 20px;
 }
