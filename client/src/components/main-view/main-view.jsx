@@ -7,7 +7,6 @@ import { RouterLink } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 
@@ -18,6 +17,7 @@ import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
+import { UpdateView } from '../profile-view/update-view';
 import './main-view.scss';
 
 export class MainView extends React.Component {
@@ -29,9 +29,7 @@ export class MainView extends React.Component {
     // Initialize the state to an empty object so we can destructure (= accessing the state's attributes) it later
     this.state = {
       movies: [],
-      // selectedMovie: null,
-      user: null,  // default is logged out
-      newUser: false
+      user: null, // default is logged out
     };
   }
 
@@ -42,6 +40,7 @@ export class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
+        console.log(response);
         // Assign the result to the state
         this.setState({
           movies: response.data
@@ -56,6 +55,8 @@ export class MainView extends React.Component {
   componentDidMount() {
     // Persists login data: get value of token from localStorage.
     let accessToken = localStorage.getItem('token');
+
+
     if (accessToken !== null) {
       this.setState({
         user: localStorage.getItem('user')
@@ -65,93 +66,122 @@ export class MainView extends React.Component {
   }
 
 
+
+
   // onLoggedIn() updates user state of MainView, will be called when user has logged in.
   // Parameter authData gives user and token
   onLoggedIn(authData) {
-    console.log(authData);
+
+
+
     this.setState({
       user: authData.user.Username
+
     });
     // Auth information (= user + token) received from handleLogin method has been saved in localStorage.
     // setItem method accepts two arguments (key and value)
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
+    localStorage.setItem('password', authData.user.Password);
+    localStorage.setItem('email', authData.user.Email);
+    localStorage.setItem('birthday', authData.user.Birthday);
+    localStorage.setItem('favorites', authData.user.Favorites);
+
+
     // Will get the movies from the API once user is logged in
     this.getMovies(authData.token);
+
   }
 
-  handleRegistration() {
-    this.setState({
-      newUser: true
-    });
-  }
-
-  alreadyRegistered() {
-    this.setState({
-      newUser: false
-    });
-  }
 
   handleLogout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('email');
+    localStorage.removeItem('birthday');
+    localStorage.removeItem('password');
+    localStorage.removeItem('favorites');
     this.setState({
       user: null
+
     });
+    window.open('/', '_self');
   }
 
   render() {
     // If the state isn't initialized, this will throw on runtime before the data is initially loaded
-    const { movies, user, newUser } = this.state;
-    // Method onLoggedIn() is passed as a prop named onLoggedIn to LoginView
-    if (!user && !newUser) return <LoginView onClick={() => this.handleRegistration()} onLoggedIn={user => this.onLoggedIn(user)} />;
+    const { movies, user } = this.state;
+    console.log(user);
+    const password = localStorage.getItem('password');
+    const email = localStorage.getItem('email');
+    const birthday = localStorage.getItem('birthday');
+    const favorites = localStorage.getItem('favorites');
 
-    if (newUser) return <RegistrationView onClick={() => this.alreadyRegistered()} onLoggedIn={user => this.onLoggedIn(user)} />
 
     // Before the movies have been loaded
     if (!movies) return <div className="main-view" />;
 
-    return (
-      <Router>
-        <div className="main-view">
+    if (!user) {
+      return (
+        <Router>
+          <div className="main-view">
+            <Container className="container">
+              <Row className="justify-content-center">
+                <Col xs={11} sm={6} md={3}>
+                  <Route exact path="/" render={() => < LoginView onLoggedIn={user => this.onLoggedIn(user)} />} />
+                </Col>
+              </Row>
+              <Row className="justify-content-center">
+                <Col xs={11} sm={6} md={3}>
+                  <Route path="/register" render={() => <RegistrationView />} />
+                </Col>
+
+              </Row>
+            </Container>
+          </div>
+        </Router >
+      );
+    } else {
+      return (
+        <Router>
           <Navbar sticky="top" bg="light" expand="lg" className="mb-3 shadow-sm p-3 mb-5">
             <Navbar.Brand href="http://localhost:1234/" className="navbar-brand">myFlix</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
               <Link component={RouterLink} to={`/users/${user}`} >
-                <Button variant="light mr-1" size="lg" className="profile-button">{user}'s Profile</Button>
+                <Button variant="light mr-1" size="lg" className="profile-button">See {user}'s Profile</Button>
               </Link>
               <Button variant="primary ml-1" size="lg" className="logout-button" onClick={() => this.handleLogout()}>Log out</Button>
             </Navbar.Collapse>
           </Navbar>
-          <Container className="container-fluid">
-            <Row>
-              <Route exact path="/" render={() => {
-                if (!user && !newUser) return <LoginView onClick={() => this.handleRegistration()} onLoggedIn={user => this.onLoggedIn(user)} />;
-                return movies.map(m =>
+          <div className="main-view">
+            <Container className="container-fluid">
+              <Row>
+                <Route exact path="/" render={() => movies.map(m =>
                   <Col key={m._id} xs={12} sm={6} md={4} lg={3} className="card-margin">
                     <MovieCard key={m._id} movie={m} />
-                  </Col>)
-              }} />
-              <Route path="/register" render={() => <RegistrationView />} />
+                  </Col>)} />
+                <Route path="/movies/:movieId" render={({ match }) =>
+                  <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
+                <Route exact path="/genres/:name" render={({ match }) => {
+                  if (!movies) return <div className="main-view" />;
+                  return <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} movies={movies} />
+                }
+                } />
+                <Route exact path="/directors/:name" render={({ match }) => {
+                  if (!movies) return <div className="main-view" />;
+                  return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} movies={movies} />
+                }
+                } />
+                <Route exact path="/users/:Username" render={() => <ProfileView username={user} password={password} email={email} birthday={birthday} favorites={favorites} movies={movies} />}
+                />
+                <Route exact path="/update/:Username" render={() => <UpdateView user={user} />} />
+              </Row>
+            </Container>
+          </div>
+        </Router>
 
-              <Route path="/movies/:movieId" render={({ match }) =>
-                <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
-              <Route exact path="/genres/:name" render={({ match }) => {
-                if (!movies) return <div className="main-view" />;
-                return <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} />
-              }
-              } />
-              <Route exact path="/directors/:name" render={({ match }) => {
-                if (!movies) return <div className="main-view" />;
-                return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
-              }
-              } />
-              <Route exact path="/users/:Username" render={() => <ProfileView />} />
-            </Row>
-          </Container>
-        </div>
-      </Router>
-    );
+      );
+    }
   }
 }
