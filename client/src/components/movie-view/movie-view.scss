@@ -22,3 +22,20 @@ $font-family: 'Alegreya Sans', sans-serif;
   text-decoration: none !important;
 }
 
+.add-favorite {
+  background-color: $secondary-color;
+  color: $primary-color;
+  border-color: $secondary-color;
+  border-radius: 24px;
+}
+
+.add-favorite:hover {
+  color: $primary-color;
+  border-color: $secondary-color;
+  background-color: darken($secondary-color, 20%);
+}
+
+.heart {
+  color: $primary-color; 
+}
+

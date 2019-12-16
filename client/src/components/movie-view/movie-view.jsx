@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import './movie-view.scss';
 
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
 
 export class MovieView extends React.Component {
 
@@ -14,6 +15,10 @@ export class MovieView extends React.Component {
 
     this.state = {};
   }
+
+  // function addToFavorites {
+
+  // }
 
   render() {
     console.log(this.props);
@@ -27,7 +32,7 @@ export class MovieView extends React.Component {
           <Media.Body>
             <span className="d-flex align-items-center">
               <Link to={`/`}>
-                <i className="material-icons">arrow_back_ios</i>
+                <i className="material-icons arrow-back">arrow_back_ios</i>
               </Link>
               <h1 className="display-4">{movie.Title}</h1>
             </span>
@@ -46,6 +51,14 @@ export class MovieView extends React.Component {
 
 
             <p className="text-justify">{movie.Description}</p>
+            <Button className="add-favorite mt-2">
+              <span className="d-flex align-items-center">
+                <i className="material-icons heart mr-3">favorite</i>
+                Add to my favorites
+              </span>
+
+            </Button>
+
           </Media.Body>
           <img
             width={220}
