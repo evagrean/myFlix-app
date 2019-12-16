@@ -10,6 +10,7 @@ import Col from 'react-bootstrap/Col';
 import './login-view.scss';
 
 export function LoginView(props) {
+  console.log(props);
   // Calling useState() method with empty string (= initial value of login variable)
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -24,7 +25,7 @@ export function LoginView(props) {
     })
       .then(response => {
         const data = response.data;
-        // This method triggers the onLoggedIn method in main-view.jsx
+        // This method triggers the onLoggedIn method in MainView and updates user state
         props.onLoggedIn(data);
       })
       .catch(error => {
@@ -36,7 +37,7 @@ export function LoginView(props) {
   return (
     <div className="login-view">
       <Row className="justify-content-center">
-        <Col xs={11} sm={6} md={3}>
+        <Col>
           <Container className="container login-container border border-light shadow p-3 mb-5 rounded py-3 px-3">
             <h3 className="pb-2">Log in to myFlix</h3>
             <Form className="login-form">
@@ -56,7 +57,10 @@ export function LoginView(props) {
           <Container className="mt-4">
             <Row className="d-flex align-items-center justify-content-center">
               <span>Don't have an account?</span>
-              <Button variant="link" className="sign-up-link btn-lg" type="submit" onClick={() => props.onClick()}>Sign up</Button>
+              <Link to={`/register`}>
+                <Button variant="link" className="sign-up-link btn-lg" type="submit">Sign up</Button>
+              </Link>
+
             </Row>
           </Container>
         </Col>

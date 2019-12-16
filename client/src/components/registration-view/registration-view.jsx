@@ -38,7 +38,7 @@ export function RegistrationView(props) {
   return (
     <div className="registration-view">
       <Row className="justify-content-center">
-        <Col xs={11} sm={6} md={3}>
+        <Col>
           <Container className="container register-container border border-light shadow p-3 mb-5 rounded py-3 px-3">
             <h3 className="pb-2">Sign up for myFlix</h3>
             <Form className="registration-form">
@@ -59,14 +59,17 @@ export function RegistrationView(props) {
                 <Form.Control type="date" placeholder="01/01/1980" value={birthday} onChange={e => createBirthday(e.target.value)} />
               </Form.Group>
               <Row className="justify-content-end">
-                <Button className="sign-up-button ml-3 mr-3" variant="primary" type="submit" block onClick={handleRegister}>Sign up</Button>
+                <Button className="sign-up-button ml-3 mr-3" variant="primary" type="submit" block onClick={handleRegister} >Sign up</Button>
               </Row>
             </Form>
           </Container>
           <Container className="mt-4">
             <Row className="d-flex align-items-center justify-content-center">
               <span>Already have an account?</span>
-              <Button variant="link" className="login-link btn-lg" type="submit" onClick={() => props.onClick()}>Login</Button>
+              <Link to={`/`}>
+                <Button variant="link" className="login-link btn-lg" type="submit">Login</Button>
+              </Link>
+
             </Row>
           </Container>
         </Col>
@@ -80,7 +83,8 @@ RegistrationView.propTypes = {
   username: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  birthday: PropTypes.instanceOf(Date),
-  onClick: PropTypes.func.isRequired
+  birthday: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+
 }
 
