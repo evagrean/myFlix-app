@@ -41,7 +41,31 @@ export class DirectorView extends React.Component {
             </Card.Body>
           </Card>
           <Container>
-            <h4 className="mt-4">Some movies from {director.Name}</h4>
+            <h4 className="mt-4">Some more movies from {director.Name}</h4>
+            <div className="d-flex row mt-3 ml-1">
+              {movies.map(movie => {
+                if (movie.Director.Name === director.Name) {
+                  return (
+                    <div key={movie._id}>
+                      <Card className="mb-3 mr-2 h-100" style={{ width: '16rem' }} >
+                        <Card.Img variant="top" src={movie.ImagePath} />
+                        <Card.Body>
+                          <Link className="text-muted" to={`/movies/${movie._id}`}>
+                            <Card.Title>{movie.Title}</Card.Title>
+                          </Link>
+                          <Card.Text>{movie.Description.substring(0, 90)}...</Card.Text>
+                        </Card.Body>
+                        <Card.Footer className="bg-white border-top-0">
+                          <Link to={`/movies/${movie._id}`}>
+                            <Button variant="link" className="read-more-link pl-0">Read more</Button>
+                          </Link>
+                        </Card.Footer>
+                      </Card>
+                    </div>
+                  );
+                }
+              })}
+            </div>
           </Container>
         </Container>
 
