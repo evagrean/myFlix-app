@@ -41,7 +41,7 @@ export class DirectorView extends React.Component {
             </Card.Body>
           </Card>
           <Container>
-            <h4 className="mt-4">Some more movies from {director.Name}</h4>
+            <h4 className="mt-4">Some movies from {director.Name}</h4>
             <div className="d-flex row mt-3 ml-1">
               {movies.map(movie => {
                 if (movie.Director.Name === director.Name) {

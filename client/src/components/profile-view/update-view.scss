@@ -13,6 +13,13 @@ $font-family: 'Alegreya Sans', sans-serif;
   border-color: lighten( $primary-color, 20% );
 }
 
+.update-btn:focus,
+.update-btn:active {
+  outline: none !important;
+  box-shadow: none;
+  background-color: lighten( $primary-color, 20% ) !important;
+}
+
 .unregister-btn {
   color: $primary-color;
 }

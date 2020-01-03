@@ -24,6 +24,13 @@ $font-family: 'Alegreya Sans', sans-serif;
   border-color: lighten( $primary-color, 20% );
 }
 
+.logout-button:focus,
+.logout-button:active {
+  outline: none !important;
+  box-shadow: none;
+  background-color: lighten( $primary-color, 20% );
+}
+
 .profile-button {
   background-color: $secondary-color;
   color: $primary-color;
@@ -31,4 +38,10 @@ $font-family: 'Alegreya Sans', sans-serif;
 
 .profile-button:hover {
   color: $primary-color;
+}
+
+.profile-button:focus,
+.profile-button:active {
+  outline: none !important;
+  box-shadow: none;
 }

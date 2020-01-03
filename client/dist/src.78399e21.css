@@ -22,6 +22,13 @@ body {
   border-color: #903cb3;
 }
 
+.login-button:focus,
+.login-button:active {
+  outline: none !important;
+  box-shadow: none;
+  background-color: #903cb3;
+}
+
 .sign-up-link {
   color: #522266;
 }
@@ -49,6 +56,13 @@ body {
 .sign-up-button:hover {
   background-color: #903cb3;
   border-color: #903cb3;
+}
+
+.sign-up-button:focus,
+.sigh-up-button:active {
+  outline: none !important;
+  box-shadow: none;
+  background-color: #903cb3;
 }
 
 .login-link {
@@ -84,16 +98,23 @@ body {
   text-decoration: none !important;
 }
 
-.add-favorite {
+.add-favorite-btn {
   background-color: #ececec;
   color: #522266;
   border-color: #ececec;
   border-radius: 24px;
 }
 
-.add-favorite:hover {
+.add-favorite-btn:hover {
   color: #522266;
   border-color: #ececec;
+  background-color: #b9b9b9;
+}
+
+.add-favorite-btn:focus,
+.add-favorite-btn:active {
+  outline: none !important;
+  box-shadow: none;
   background-color: #b9b9b9;
 }
 
@@ -112,6 +133,13 @@ body {
   border-color: #b9b9b9;
 }
 
+.update-button:focus,
+.update-button:active {
+  outline: none !important;
+  box-shadow: none;
+  background-color: #b9b9b9 !important;
+}
+
 .delete-button {
   background-color: #522266;
   border-color: #522266;
@@ -122,6 +150,13 @@ body {
   background-color: #903cb3;
   border-color: #903cb3;
 }
+
+.delete-button:focus,
+.delete-button:active {
+  outline: none !important;
+  box-shadow: none;
+  background-color: #903cb3 !important;
+}
 .update-btn {
   background-color: #522266;
   border-color: #522266;
@@ -131,6 +166,13 @@ body {
 .update-btn:hover {
   background-color: #903cb3;
   border-color: #903cb3;
+}
+
+.update-btn:focus,
+.update-btn:active {
+  outline: none !important;
+  box-shadow: none;
+  background-color: #903cb3 !important;
 }
 
 .unregister-btn {
@@ -162,6 +204,13 @@ body {
   border-color: #903cb3;
 }
 
+.logout-button:focus,
+.logout-button:active {
+  outline: none !important;
+  box-shadow: none;
+  background-color: #903cb3;
+}
+
 .profile-button {
   background-color: #ececec;
   color: #522266;
@@ -169,6 +218,12 @@ body {
 
 .profile-button:hover {
   color: #522266;
+}
+
+.profile-button:focus,
+.profile-button:active {
+  outline: none !important;
+  box-shadow: none;
 }
 body {
   font-family: "Alegreya Sans", sans-serif;

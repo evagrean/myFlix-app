@@ -29,6 +29,7 @@ export class MainView extends React.Component {
     // Initialize the state to an empty object so we can destructure (= accessing the state's attributes) it later
     this.state = {
       movies: [],
+      users: [],
       user: null, // default is logged out
     };
   }
@@ -51,6 +52,20 @@ export class MainView extends React.Component {
       });
   }
 
+  getAllUsers(token) {
+    axios.get('https://my-flix-evagrean.herokuapp.com/users', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        this.setState({
+          users: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   // One of the "hooks" available in a React Component
   componentDidMount() {
     // Persists login data: get value of token from localStorage.
@@ -62,6 +77,7 @@ export class MainView extends React.Component {
         user: localStorage.getItem('user')
       });
       this.getMovies(accessToken);
+      this.getAllUsers(accessToken);
     }
   }
 
@@ -82,10 +98,7 @@ export class MainView extends React.Component {
     // setItem method accepts two arguments (key and value)
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
-    localStorage.setItem('password', authData.user.Password);
-    localStorage.setItem('email', authData.user.Email);
-    localStorage.setItem('birthday', authData.user.Birthday);
-    localStorage.setItem('favorites', authData.user.Favorites);
+
 
 
     // Will get the movies from the API once user is logged in
@@ -97,10 +110,7 @@ export class MainView extends React.Component {
   handleLogout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    localStorage.removeItem('email');
-    localStorage.removeItem('birthday');
-    localStorage.removeItem('password');
-    localStorage.removeItem('favorites');
+
     this.setState({
       user: null
 
@@ -110,12 +120,10 @@ export class MainView extends React.Component {
 
   render() {
     // If the state isn't initialized, this will throw on runtime before the data is initially loaded
-    const { movies, user } = this.state;
+    const { movies, user, users } = this.state;
     console.log(user);
-    const password = localStorage.getItem('password');
-    const email = localStorage.getItem('email');
-    const birthday = localStorage.getItem('birthday');
-    const favorites = localStorage.getItem('favorites');
+    console.log(users);
+
 
 
     // Before the movies have been loaded
@@ -173,9 +181,10 @@ export class MainView extends React.Component {
                   return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} movies={movies} />
                 }
                 } />
-                <Route exact path="/users/:Username" render={() => <ProfileView username={user} password={password} email={email} birthday={birthday} favorites={favorites} movies={movies} />}
+                <Route exact path="/users/:Username" render={({ match }) => <ProfileView user={users.find(user => user.Username === match.params.Username)} movies={movies} />}
                 />
-                <Route exact path="/update/:Username" render={() => <UpdateView user={user} />} />
+
+                <Route exact path="/update/:Username" render={() => <UpdateView user={users.find(user => user.Username === match.params.Username)} />} />
               </Row>
             </Container>
           </div>

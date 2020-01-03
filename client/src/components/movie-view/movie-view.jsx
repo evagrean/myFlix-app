@@ -51,14 +51,6 @@ export class MovieView extends React.Component {
 
 
             <p className="text-justify">{movie.Description}</p>
-            <Button className="add-favorite mt-2">
-              <span className="d-flex align-items-center">
-                <i className="material-icons heart mr-3">favorite</i>
-                Add to my favorites
-              </span>
-
-            </Button>
-
           </Media.Body>
           <img
             width={220}
@@ -68,6 +60,13 @@ export class MovieView extends React.Component {
             alt="movie-poster placeholder"
           />
         </Media>
+        <Button className="add-favorite-btn mt-4">
+          <span className="d-flex align-items-center">
+            <i className="material-icons heart mr-3">favorite</i>
+            Add to my favorites
+              </span>
+
+        </Button>
       </div >
     );
   }

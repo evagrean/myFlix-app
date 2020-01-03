@@ -24,6 +24,13 @@ $font-family: 'Alegreya Sans', sans-serif;
   border-color: lighten( $primary-color, 20% );
 }
 
+.sign-up-button:focus,
+.sigh-up-button:active {
+  outline: none !important;
+  box-shadow: none;
+  background-color: lighten( $primary-color, 20% );
+}
+
 .login-link {
   color: $primary-color;
 }

@@ -15,7 +15,7 @@ export class GenreView extends React.Component {
   }
 
   render() {
-    const { genre, movies } = this.props;
+    const { genre, movies, movie } = this.props;
     console.log(this.props);
 
     if (!genre) return null;
@@ -35,7 +35,7 @@ export class GenreView extends React.Component {
             </Card.Body>
           </Card>
           <Container>
-            <h4 className="mt-4">Some more {genre.Name} movies</h4>
+            <h4 className="mt-4">Some {genre.Name} movies</h4>
             <div className="d-flex row mt-3 ml-1">
               {movies.map(movie => {
                 if (movie.Genre.Name === genre.Name) {
@@ -60,7 +60,6 @@ export class GenreView extends React.Component {
                 }
               })}
             </div>
-
           </Container>
         </Container>
       </div >

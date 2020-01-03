@@ -11,8 +11,14 @@ $font-family: 'Alegreya Sans', sans-serif;
 
 .update-button:hover {
   background-color: darken($secondary-color, 20%);
-  border-color: darken($secondary-color, 20%);
-  
+  border-color: darken($secondary-color, 20%);  
+}
+
+.update-button:focus,
+.update-button:active {
+  outline: none !important;
+  box-shadow: none;
+  background-color: darken($secondary-color, 20%) !important;
 }
 
 .delete-button {
@@ -24,6 +30,12 @@ $font-family: 'Alegreya Sans', sans-serif;
 
 .delete-button:hover {
   background-color: lighten( $primary-color, 20% );
-  border-color: lighten( $primary-color, 20% );
-  
+  border-color: lighten( $primary-color, 20% );  
+}
+
+.delete-button:focus,
+.delete-button:active {
+  outline: none !important;
+  box-shadow: none;
+  background-color: lighten( $primary-color, 20% ) !important;
 }

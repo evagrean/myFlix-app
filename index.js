@@ -13,19 +13,19 @@ const { check, validationResult } = require('express-validator');
 const app = express();
 
 // Allowing Mongoose to connect to online database on MongoDB Atlas
-// mongoose.connect(
-//   'mongodb+srv://myDBadmin:pWTbPxTFC6Lr3Mbk@mydb-vyikg.mongodb.net/myFlixDB?retryWrites=true&w=majority',
-//   {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-//   }
-// );
+mongoose.connect(
+  'mongodb+srv://myDBadmin:pWTbPxTFC6Lr3Mbk@mydb-vyikg.mongodb.net/myFlixDB?retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
+);
 
 // Allowing Mongoose to connect to local database
-mongoose.connect('mongodb://localhost:27017/myFlixDB', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+// mongoose.connect('mongodb://localhost:27017/myFlixDB', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// });
 
 
 mongoose.set('useFindAndModify', false);

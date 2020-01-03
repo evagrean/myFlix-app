@@ -26,6 +26,13 @@ body {
   border-color: lighten( $primary-color, 20% );
 }
 
+.login-button:focus,
+.login-button:active {
+  outline: none !important;
+  box-shadow: none;
+  background-color: lighten( $primary-color, 20% );
+}
+
 
 .sign-up-link {
   color: $primary-color;

@@ -12,12 +12,35 @@ import './update-view.scss';
 
 export function UpdateView(props) {
   const { user } = props;
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  axios.put(`https://my-flix-evagrean.herokuapp.com/users/${user}`)
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    axios.put(`https://my-flix-evagrean.herokuapp.com/users/${user}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    }, {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
+    })
+      .then(response => {
+        const updatedData = response.data;
+        console.log(updatedData);
+        console.log('user data was updated successfully');
+        alert('Your profile data was updated succsessfully');
+      })
+      .catch(error => {
+        console.log('error updating user data');
+        alert('Oops, something went wrong. Please try again');
+      });
+  };
+
 
   return (
     <div className="update-view justify-content-center">
@@ -29,7 +52,7 @@ export function UpdateView(props) {
       </span>
       <Row className="justify-content-center">
         <Col>
-          <Container className="container update-container border border-light rounded py-3 px-3">
+          <Container className="container update-container border-0 mt-0">
             <Form className="update-form">
               <Form.Group controlId="formBasicUsername">
                 <Form.Label>Username</Form.Label>
@@ -48,14 +71,17 @@ export function UpdateView(props) {
                 <Form.Control type="date" placeholder="Update your birthday" value={birthday} onChange={e => setBirthday(e.target.value)} />
               </Form.Group>
               <Row className="justify-content-end">
-                <Button className="update-btn mr-3" variant="primary" type="submit">Update</Button>
+                <Button className="update-btn mr-3" variant="primary" type="submit" onClick={handleUpdate}>Update</Button>
               </Row>
             </Form>
           </Container>
           <Container className="mt-4">
             <Row className="d-flex align-items-center justify-content-center">
               <span>Want to delete your myFlix account?</span>
-              <Button variant="link" type="submit" className="unregister-btn">Delete</Button>
+              <Link to={`/users/${user}`}>
+                <Button variant="link" className="unregister-btn">Delete</Button>
+              </Link>
+
             </Row>
           </Container>
         </Col>
