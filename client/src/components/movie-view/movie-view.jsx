@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import './movie-view.scss';
 
 import { Link } from 'react-router-dom';
-import Axios from 'axios';
+import axios from 'axios';
 
 export class MovieView extends React.Component {
 
@@ -16,15 +16,37 @@ export class MovieView extends React.Component {
     this.state = {};
   }
 
-  // function addToFavorites {
+  addToFavorites(e) {
+    const { movie } = this.props;
+    e.preventDefault();
+    axios.post(
+      `https://my-flix-evagrean.herokuapp.com/users/${localStorage.getItem('user')}/Movies/${movie._id}`,
+      { username: localStorage.getItem('user') },
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      })
+      .then(res => {
+        alert(`${movie.Title} successfully added to your favorites`);
+      })
+      .then(res => {
+        window.open(`/users/${localStorage.getItem('user')}`)
+      })
+      .then(res => {
+        document.location.reload(true);
+      })
+      .catch(error => {
+        alert(`${movie.Title} not added to your favorites` + error)
+      });
+  }
 
-  // }
 
   render() {
     console.log(this.props);
     const { movie } = this.props;
 
     if (!movie) return null;
+
+
 
     return (
       <div className="movie-view">
@@ -60,7 +82,7 @@ export class MovieView extends React.Component {
             alt="movie-poster placeholder"
           />
         </Media>
-        <Button className="add-favorite-btn mt-4">
+        <Button className="add-favorite-btn mt-4" onClick={e => this.addToFavorites(e)}>
           <span className="d-flex align-items-center">
             <i className="material-icons heart mr-3">favorite</i>
             Add to my favorites
