@@ -157,6 +157,42 @@ body {
   box-shadow: none;
   background-color: #903cb3 !important;
 }
+
+ul {
+  list-style-type: none;
+}
+
+.movie-link {
+  color: #522266;
+}
+
+.movie-link:hover,
+.movie-link:hover {
+  color: #903cb3;
+  text-decoration: none !important;
+}
+
+.delete-movie {
+  background-color: #ececec;
+  border-color: #ececec;
+  border-radius: 24px;
+}
+
+.delete-movie:hover {
+  background-color: #b9b9b9;
+  border-color: #b9b9b9;
+}
+
+.delete-movie:focus,
+.delete-movie:active {
+  outline: none !important;
+  box-shadow: none;
+  background-color: #b9b9b9 !important;
+}
+
+.bin {
+  color: #522266;
+}
 .update-btn {
   background-color: #522266;
   border-color: #522266;
