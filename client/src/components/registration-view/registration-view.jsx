@@ -45,19 +45,19 @@ export function RegistrationView(props) {
             <Form className="registration-form">
               <Form.Group controlId="formBasicUsername">
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} />
+                <Form.Control type="text" placeholder="Enter username" pattern="[a-zA-Z0-9]+" value={username} onChange={e => setUsername(e.target.value)} required />
               </Form.Group>
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
+                <Form.Control type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} required />
               </Form.Group>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="text" placeholder="Enter your email adress" value={email} onChange={e => setEmail(e.target.value)} />
+                <Form.Control type="email" placeholder="Enter your email adress" value={email} onChange={e => setEmail(e.target.value)} required />
               </Form.Group>
               <Form.Group controlId="formBasicBirthday">
                 <Form.Label>Date of Birth</Form.Label>
-                <Form.Control type="date" placeholder="01/01/1980" value={birthday} onChange={e => setBirthday(e.target.value)} />
+                <Form.Control type="date" placeholder="01/01/1980" value={birthday} onChange={e => setBirthday(e.target.value)} required />
               </Form.Group>
               <Row className="justify-content-end">
                 <Button className="sign-up-button ml-3 mr-3" variant="primary" type="submit" block onClick={handleRegister} >Sign up</Button>
