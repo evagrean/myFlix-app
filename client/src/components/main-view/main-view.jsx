@@ -57,6 +57,7 @@ export class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
+        console.log(response);
         this.setState({
           users: response.data
         });
@@ -104,6 +105,8 @@ export class MainView extends React.Component {
     // Will get the movies from the API once user is logged in
     this.getMovies(authData.token);
 
+    this.getAllUsers(authData.token);
+
   }
 
 
@@ -121,13 +124,12 @@ export class MainView extends React.Component {
   render() {
     // If the state isn't initialized, this will throw on runtime before the data is initially loaded
     const { movies, user, users } = this.state;
-    console.log(user);
-    console.log(users);
 
 
 
-    // Before the movies have been loaded
-    if (!movies) return <div className="main-view" />;
+
+    // Before the movies and users have been loaded
+    if (!movies && !users) return <div className="main-view" />;
 
     if (!user) {
       return (
@@ -172,23 +174,27 @@ export class MainView extends React.Component {
                 <Route path="/movies/:movieId" render={({ match }) =>
                   <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
                 <Route exact path="/genres/:name" render={({ match }) => {
-                  if (!movies) return <div className="main-view" />;
+                  if (!movies || movies.length === 0) return <div className="main-view" />;
                   return <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} movies={movies} />
                 }
                 } />
                 <Route exact path="/directors/:name" render={({ match }) => {
-                  if (!movies) return <div className="main-view" />;
+                  if (!movies || movies.length === 0) return <div className="main-view" />;
                   return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} movies={movies} />
                 }
                 } />
-                <Route exact path="/users/:Username" render={({ match }) => <ProfileView user={users.find(user => user.Username === match.params.Username)} movies={movies} />}
+                <Route exact path="/users/:Username" render={({ match }) => {
+                  if (!users || users.length === 0) return <div className="main-view" />;
+                  return <ProfileView user={users.find(user => user.Username === match.params.Username)} movies={movies} />
+                }
+                }
                 />
 
-                <Route exact path="/update/:Username" render={() => <UpdateView user={users.find(user => user.Username === match.params.Username)} />} />
+                <Route exact path="/update/:Username" render={() => <UpdateView user={user} />} />
               </Row>
             </Container>
           </div>
-        </Router>
+        </Router >
 
       );
     }
