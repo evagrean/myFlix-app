@@ -41094,10 +41094,12 @@ function RegistrationView(props) {
   }, _react.default.createElement(_Form.default.Label, null, "Username"), _react.default.createElement(_Form.default.Control, {
     type: "text",
     placeholder: "Enter username",
+    pattern: "[a-zA-Z0-9]+",
     value: username,
     onChange: function onChange(e) {
       return setUsername(e.target.value);
-    }
+    },
+    required: true
   })), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicPassword"
   }, _react.default.createElement(_Form.default.Label, null, "Password"), _react.default.createElement(_Form.default.Control, {
@@ -41106,16 +41108,18 @@ function RegistrationView(props) {
     value: password,
     onChange: function onChange(e) {
       return setPassword(e.target.value);
-    }
+    },
+    required: true
   })), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicEmail"
   }, _react.default.createElement(_Form.default.Label, null, "Email"), _react.default.createElement(_Form.default.Control, {
-    type: "text",
+    type: "email",
     placeholder: "Enter your email adress",
     value: email,
     onChange: function onChange(e) {
       return setEmail(e.target.value);
-    }
+    },
+    required: true
   })), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicBirthday"
   }, _react.default.createElement(_Form.default.Label, null, "Date of Birth"), _react.default.createElement(_Form.default.Control, {
@@ -41124,7 +41128,8 @@ function RegistrationView(props) {
     value: birthday,
     onChange: function onChange(e) {
       return setBirthday(e.target.value);
-    }
+    },
+    required: true
   })), _react.default.createElement(_Row.default, {
     className: "justify-content-end"
   }, _react.default.createElement(_Button.default, {
@@ -53263,7 +53268,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60992" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61811" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
