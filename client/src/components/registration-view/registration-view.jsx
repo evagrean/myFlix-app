@@ -1,3 +1,4 @@
+//@ts-check
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -15,9 +16,8 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  const handleRegister = () => {
+  const handleRegister = (e) => {
     e.preventDefault();
-
     axios.post('https://my-flix-evagrean.herokuapp.com/users', {
       Username: username,
       Password: password,
@@ -27,11 +27,12 @@ export function RegistrationView(props) {
       .then(response => {
         const data = response.data;
         console.log(data);
+        alert('Registration was successful. Please log in')
         window.open('/', '_self'); // with '_self' page will open in current tab
       })
       .catch(error => {
-        console.log('error registering user')
-        return alert('Oops. Please try again');
+        console.log('error register user. Username has to be at least five chars long')
+        return alert('Registration failed. Please make sure your username is at least 5 chars long');
       });
   };
 
@@ -67,7 +68,7 @@ export function RegistrationView(props) {
             <Row className="d-flex align-items-center justify-content-center">
               <span>Already have an account?</span>
               <Link to={`/`}>
-                <Button variant="link" className="login-link btn-lg" type="submit">Login</Button>
+                <Button variant="link" className="login-link btn-lg">Login</Button>
               </Link>
 
             </Row>
