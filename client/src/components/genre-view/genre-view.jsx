@@ -14,6 +14,10 @@ export class GenreView extends React.Component {
     this.state = {};
   }
 
+  // back() {
+  //   this.goBack();
+  // }
+
   render() {
     const { genre, movies, movie } = this.props;
     console.log(this.props);
@@ -26,7 +30,7 @@ export class GenreView extends React.Component {
           <Card style={{ minwidth: '20rem' }} className="border-0 pl-0">
             <Card.Body>
               <span className="d-flex align-items-center mb-4">
-                <Link to={`/`}>
+                <Link to="" onClick={() => history.back()}>
                   <i className="material-icons">arrow_back_ios</i>
                 </Link>
                 <h1 className="display-4">{genre.Name}</h1>

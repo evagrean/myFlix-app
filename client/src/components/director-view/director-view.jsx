@@ -28,7 +28,7 @@ export class DirectorView extends React.Component {
           <Card style={{ minwidth: '20rem' }} className="border-0 pl-0">
             <Card.Body>
               <span className="d-flex align-items-center">
-                <Link to={`/`}>
+                <Link to="" onClick={() => history.back()}>
                   <i className="material-icons">arrow_back_ios</i>
                 </Link>
                 <h1 className="display-4">{director.Name}</h1>
