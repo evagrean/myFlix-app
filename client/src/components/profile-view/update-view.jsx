@@ -4,43 +4,43 @@ import { Link } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
-import { Card } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 
 import './update-view.scss';
 
 export function UpdateView(props) {
-  const { user } = props;
+  const { user } = props
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [birthday, setBirthday] = useState('');
 
+  const [username, updateUsername] = useState('');
+  const [password, updatePassword] = useState('');
+  const [email, updateEmail] = useState('');
+  const [birthday, updateBirthday] = useState('');
 
   const handleUpdate = (e) => {
     e.preventDefault();
     axios.put(`https://my-flix-evagrean.herokuapp.com/users/${user}`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-    }, {
       Username: username,
       Password: password,
-      Email: email,
-      Birthday: birthday
+      Birthday: birthday,
+      Email: email
+    }, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     })
-      .then(response => {
-        const updatedData = response.data;
-        console.log(updatedData);
-        console.log('user data was updated successfully');
-        alert('Your profile data was updated succsessfully');
+      .then(res => {
+        const data = res.data;
+        console.log(data);
+        alert('Your profile data was updated successfully');
+        localStorage.setItem('user', data.Username);
+        window.open(`/users/${localStorage.getItem('user')}`);
       })
       .catch(error => {
-        console.log('error updating user data');
-        alert('Oops, something went wrong. Please try again');
-      });
-  };
 
+        alert('error updating user ' + error);
+      });
+
+  }
 
   return (
     <div className="update-view justify-content-center">
@@ -56,19 +56,19 @@ export function UpdateView(props) {
             <Form className="update-form">
               <Form.Group controlId="formBasicUsername">
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="text" placeholder="Update username" value={username} onChange={e => setUsername(e.target.value)} />
+                <Form.Control type="text" placeholder="Update username" value={username} onChange={e => updateUsername(e.target.value)} />
               </Form.Group>
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Update password" value={password} onChange={e => setPassword(e.target.value)} />
+                <Form.Control type="password" placeholder="Update password" value={password} onChange={e => updatePassword(e.target.value)} />
               </Form.Group>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="text" placeholder="Update your email adress" value={email} onChange={e => setEmail(e.target.value)} />
+                <Form.Control type="text" placeholder="Update your email adress" value={email} onChange={e => updateEmail(e.target.value)} />
               </Form.Group>
               <Form.Group controlId="formBasicBirthday">
                 <Form.Label>Date of Birth</Form.Label>
-                <Form.Control type="date" placeholder="Update your birthday" value={birthday} onChange={e => setBirthday(e.target.value)} />
+                <Form.Control type="date" placeholder="Update your birthday" value={birthday} onChange={e => updateBirthday(e.target.value)} />
               </Form.Group>
               <Row className="justify-content-end">
                 <Button className="update-btn mr-3" variant="primary" type="submit" onClick={handleUpdate}>Update</Button>
@@ -87,11 +87,6 @@ export function UpdateView(props) {
         </Col>
       </Row>
     </div>
-
-
   );
-
-
-
 }
 
