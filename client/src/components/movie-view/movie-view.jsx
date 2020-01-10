@@ -1,5 +1,4 @@
 import React from 'react';
-import { MainView } from '../main-view/main-view';
 import PropTypes from 'prop-types';
 import Media from 'react-bootstrap/Media';
 import Button from 'react-bootstrap/Button';
@@ -28,9 +27,9 @@ export class MovieView extends React.Component {
       .then(res => {
         alert(`${movie.Title} successfully added to your favorites`);
       })
-      .then(res => {
-        window.open(`/users/${localStorage.getItem('user')}`)
-      })
+      // .then(res => {
+      //   window.open(`/users/${localStorage.getItem('user')}`)
+      // })
       .then(res => {
         document.location.reload(true);
       })
@@ -96,14 +95,23 @@ export class MovieView extends React.Component {
 
 MovieView.propTypes = {
   movie: PropTypes.shape({
-    ImagePath: PropTypes.string.isRequired,
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
+    _id: PropTypes.string,
+    Title: PropTypes.string,
+    ReleaseYear: PropTypes.string,
+    ImagePath: PropTypes.string,
+    Description: PropTypes.string,
     Genre: PropTypes.shape({
-      Name: PropTypes.string.isRequired
-    }).isRequired,
+      Name: PropTypes.string,
+      Description: PropTypes.string
+    }),
     Director: PropTypes.shape({
-      Name: PropTypes.string.isRequired
-    }).isRequired
-  }).isRequired
+      Name: PropTypes.string,
+      Bio: PropTypes.string,
+      Birth: PropTypes.string,
+      Death: PropTypes.string
+    }),
+    Featured: PropTypes.boolean,
+    Actors: PropTypes.array
+  })
+    .isRequired
 };
