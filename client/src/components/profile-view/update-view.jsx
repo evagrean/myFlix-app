@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
@@ -11,6 +12,7 @@ import './update-view.scss';
 
 export function UpdateView(props) {
   const { user } = props
+  console.log(props);
 
 
   const [username, updateUsername] = useState('');
@@ -50,25 +52,31 @@ export function UpdateView(props) {
         </Link>
         <h1 className="">Update {user}'s profile</h1>
       </span>
+      <p className="lead pl-3 mb-4 warning">Please make sure you fill in every input field before pressing update-button.
+      If you want to keep some data as it is, fill in original data again.</p>
+
+
+
       <Row className="justify-content-center">
+
         <Col>
           <Container className="container update-container border-0 mt-0">
             <Form className="update-form">
               <Form.Group controlId="formBasicUsername">
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="text" placeholder="Update username" value={username} onChange={e => updateUsername(e.target.value)} />
+                <Form.Control required type="text" placeholder="Update username or repeat original" onChange={e => updateUsername(e.target.value)} />
               </Form.Group>
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Update password" value={password} onChange={e => updatePassword(e.target.value)} />
+                <Form.Control required type="password" placeholder="Update password or repeat original" onChange={e => updatePassword(e.target.value)} />
               </Form.Group>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="text" placeholder="Update your email adress" value={email} onChange={e => updateEmail(e.target.value)} />
+                <Form.Control required type="text" placeholder="Update your email adress or repeat original" onChange={e => updateEmail(e.target.value)} />
               </Form.Group>
               <Form.Group controlId="formBasicBirthday">
                 <Form.Label>Date of Birth</Form.Label>
-                <Form.Control type="date" placeholder="Update your birthday" value={birthday} onChange={e => updateBirthday(e.target.value)} />
+                <Form.Control required type="date" placeholder="Update your birthday or repeat original" onChange={e => updateBirthday(e.target.value)} />
               </Form.Group>
               <Row className="justify-content-end">
                 <Button className="update-btn mr-3" variant="primary" type="submit" onClick={handleUpdate}>Update</Button>
@@ -90,3 +98,6 @@ export function UpdateView(props) {
   );
 }
 
+UpdateView.propTypes = {
+  user: PropTypes.string.isRequired
+}

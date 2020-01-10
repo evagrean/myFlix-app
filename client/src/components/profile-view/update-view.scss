@@ -2,6 +2,10 @@ $primary-color: #522266;
 $secondary-color: #ececec;
 $font-family: 'Alegreya Sans', sans-serif;
 
+.warning {
+  color: lighten($primary-color, 20%);
+}
+
 .update-btn {
   background-color: $primary-color;
   border-color: $primary-color;
