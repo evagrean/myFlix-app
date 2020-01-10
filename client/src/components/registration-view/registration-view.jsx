@@ -1,7 +1,6 @@
 //@ts-check
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form';
@@ -80,12 +79,7 @@ export function RegistrationView(props) {
   );
 }
 
-RegistrationView.propTypes = {
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  birthday: PropTypes.string.isRequired
+// no props
 
 
-}
 
