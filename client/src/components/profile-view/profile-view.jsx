@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
@@ -59,14 +60,14 @@ export class ProfileView extends React.Component {
 
 
   render() {
-    const { user, movies } = this.props;
-    console.log(this.props);
+    const { user, userProfile, movies } = this.props;
     console.log(user);
+    console.log(userProfile)
 
-    const favoritesList = movies.filter(movie => user.Favorites.includes(movie._id));
+    const favoritesList = movies.filter(movie => userProfile.Favorites.includes(movie._id));
     console.log(favoritesList);
 
-    if (!user || !movies || movies.length === 0) return <div>loading</div>;
+    if (!user || !userProfile || !movies || movies.length === 0) return <div>loading</div>;
 
     return (
       <div className="profile-view">
@@ -80,11 +81,11 @@ export class ProfileView extends React.Component {
                 <h1 className="display-4">Profile</h1>
               </span>
               <Card.Text className="mb-4 lead">
-                <span className="font-weight-bold">Username: </span>{user.Username} <br />
-                <span className="font-weight-bold">Email: </span>{user.Email} <br />
-                <span className="font-weight-bold">Birthday: </span>{user.Birthday.slice(0, 10)} <br />
+                <span className="font-weight-bold">Username: </span>{userProfile.Username} <br />
+                <span className="font-weight-bold">Email: </span>{userProfile.Email} <br />
+                <span className="font-weight-bold">Birthday: </span>{userProfile.Birthday.slice(0, 10)} <br />
               </Card.Text>
-              <Link to={`/update/${user.Username}`}>
+              <Link to={`/update/${userProfile.Username}`}>
                 <Button variant="primary" className="update-button">Update my profile</Button>
               </Link>
 
@@ -94,13 +95,13 @@ export class ProfileView extends React.Component {
           <Container>
 
             <h4 className="mt-4 mb-4">My favorite movies: </h4>
-            {user.Favorites.length === 0 &&
+            {userProfile.Favorites.length === 0 &&
               <div>You have no favorite movies</div>}
-            {user.Favorites.length > 0 &&
+            {userProfile.Favorites.length > 0 &&
               <ul className="ml-0 pl-0">
                 {favoritesList.map(movie =>
                   (
-                    <li key={movie} className="mb-2 ">
+                    <li key={movie._id} className="mb-2 ">
                       <span className="d-flex align-items-center">
                         <Button variant="primary" size="sm" className="delete-movie mr-2" onClick={e => this.deleteFavorite(movie._id)}>
                           <i className="material-icons bin">delete</i>
@@ -124,4 +125,34 @@ export class ProfileView extends React.Component {
     );
 
   }
+}
+
+ProfileView.propTypes = {
+  userProfile: PropTypes.shape({
+    _id: PropTypes.string,
+    Username: PropTypes.string,
+    Password: PropTypes.string,
+    Birthday: PropTypes.date
+  }),
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      Title: PropTypes.string,
+      ReleaseYear: PropTypes.string,
+      ImagePath: PropTypes.string,
+      Description: PropTypes.string,
+      Genre: PropTypes.shape({
+        Name: PropTypes.string,
+        Description: PropTypes.string
+      }),
+      Director: PropTypes.shape({
+        Name: PropTypes.string,
+        Bio: PropTypes.string,
+        Birth: PropTypes.string,
+        Death: PropTypes.string
+      }),
+      Featured: PropTypes.boolean,
+      Actors: PropTypes.array
+    })
+  ).isRequired
 }
