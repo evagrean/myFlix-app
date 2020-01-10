@@ -14,9 +14,6 @@ export class GenreView extends React.Component {
     this.state = {};
   }
 
-  // back() {
-  //   this.goBack();
-  // }
 
   render() {
     const { genre, movies, movie } = this.props;
@@ -72,3 +69,10 @@ export class GenreView extends React.Component {
   }
 
 }
+
+GenreView.propTypes = {
+  genre: PropTypes.shape({
+    Name: PropTypes.string,
+    Description: PropTypes.string
+  }).isRequired
+};
