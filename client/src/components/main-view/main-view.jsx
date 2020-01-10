@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 // BrowserRouter used for implementing state-based routing
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -10,9 +12,13 @@ import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 
+// #0
+import { setMovies } from '../../actions/actions';
+import { setUserProfile } from '../../actions/actions';
+import MoviesList from '../movies-list/movies-list';
+
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
-import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
@@ -20,7 +26,7 @@ import { ProfileView } from '../profile-view/profile-view';
 import { UpdateView } from '../profile-view/update-view';
 import './main-view.scss';
 
-export class MainView extends React.Component {
+class MainView extends React.Component {
 
   constructor() {
     // Call the superclass constructor so react can initialize it
@@ -28,9 +34,8 @@ export class MainView extends React.Component {
 
     // Initialize the state to an empty object so we can destructure (= accessing the state's attributes) it later
     this.state = {
-      movies: [],
-      users: [],
       user: null, // default is logged out
+
     };
   }
 
@@ -42,25 +47,23 @@ export class MainView extends React.Component {
     })
       .then(response => {
         console.log(response);
-        // Assign the result to the state
-        this.setState({
-          movies: response.data
-        });
+        // #1
+        this.props.setMovies(response.data);
+
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
-  getAllUsers(token) {
-    axios.get('https://my-flix-evagrean.herokuapp.com/users', {
+  getProfileData(token) {
+    axios.get(`https://my-flix-evagrean.herokuapp.com/users/${localStorage.getItem('user')}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
         console.log(response);
-        this.setState({
-          users: response.data
-        });
+        // #1 setUserProfile
+        this.props.setUserProfile(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -78,7 +81,7 @@ export class MainView extends React.Component {
         user: localStorage.getItem('user')
       });
       this.getMovies(accessToken);
-      this.getAllUsers(accessToken);
+      this.getProfileData(accessToken);
     }
   }
 
@@ -88,13 +91,10 @@ export class MainView extends React.Component {
   // onLoggedIn() updates user state of MainView, will be called when user has logged in.
   // Parameter authData gives user and token
   onLoggedIn(authData) {
-
-
-
     this.setState({
       user: authData.user.Username
-
     });
+
     // Auth information (= user + token) received from handleLogin method has been saved in localStorage.
     // setItem method accepts two arguments (key and value)
     localStorage.setItem('token', authData.token);
@@ -105,7 +105,8 @@ export class MainView extends React.Component {
     // Will get the movies from the API once user is logged in
     this.getMovies(authData.token);
 
-    this.getAllUsers(authData.token);
+    // this.getAllUsers(authData.token);
+    this.getProfileData(authData.token);
 
   }
 
@@ -123,13 +124,16 @@ export class MainView extends React.Component {
 
   render() {
     // If the state isn't initialized, this will throw on runtime before the data is initially loaded
-    const { movies, user, users } = this.state;
+
+    // #2
+    let { movies, userProfile } = this.props;
+    let { user } = this.state;
 
 
 
 
-    // Before the movies and users have been loaded
-    if (!movies && !users) return <div className="main-view" />;
+    // Before the movies and profileData have been loaded
+    if (!movies && !userProfile) return <div className="main-view" />;
 
     if (!user) {
       return (
@@ -167,10 +171,7 @@ export class MainView extends React.Component {
           <div className="main-view">
             <Container className="container-fluid">
               <Row>
-                <Route exact path="/" render={() => movies.map(m =>
-                  <Col key={m._id} xs={12} sm={6} md={4} lg={3} className="card-margin">
-                    <MovieCard key={m._id} movie={m} />
-                  </Col>)} />
+                <Route exact path="/" render={() => <MoviesList movies={movies} />} />
                 <Route path="/movies/:movieId" render={({ match }) =>
                   <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
                 <Route exact path="/genres/:name" render={({ match }) => {
@@ -183,13 +184,11 @@ export class MainView extends React.Component {
                   return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} movies={movies} />
                 }
                 } />
-                <Route exact path="/users/:Username" render={({ match }) => {
-                  if (!users || users.length === 0) return <div className="main-view" />;
-                  return <ProfileView user={users.find(user => user.Username === match.params.Username)} movies={movies} />
-                }
-                }
+                <Route exact path="/users/:Username" render={() => {
+                  if (!userProfile) return <div className="main-view" />
+                  return <ProfileView userProfile={userProfile} user={user} movies={movies} />
+                }}
                 />
-
                 <Route exact path="/update/:Username" render={() => <UpdateView user={user} />} />
               </Row>
             </Container>
@@ -200,3 +199,41 @@ export class MainView extends React.Component {
     }
   }
 }
+
+// #3
+let mapStateToProps = state => {
+  return { movies: state.movies, userProfile: state.userProfile }
+}
+
+// #4
+export default connect(mapStateToProps, { setMovies, setUserProfile })(MainView);
+
+MainView.propTypes = {
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      Title: PropTypes.string,
+      ReleaseYear: PropTypes.string,
+      ImagePath: PropTypes.string,
+      Description: PropTypes.string,
+      Genre: PropTypes.shape({
+        Name: PropTypes.string,
+        Description: PropTypes.string
+      }),
+      Director: PropTypes.shape({
+        Name: PropTypes.string,
+        Bio: PropTypes.string,
+        Birth: PropTypes.string,
+        Death: PropTypes.string
+      }),
+      Featured: PropTypes.boolean,
+      Actors: PropTypes.array
+    })
+  ),
+  userProfile: PropTypes.shape({
+    _id: PropTypes.string,
+    Username: PropTypes.string,
+    Password: PropTypes.string,
+    Birthday: PropTypes.date
+  }).isRequired
+};
