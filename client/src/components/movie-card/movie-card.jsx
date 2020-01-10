@@ -36,8 +36,8 @@ that contains special values provided as utilities by prop-types module.
 This values help specify how MovieCard's props should look*/
 MovieCard.propTypes = {
   movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired
+    Title: PropTypes.string,
+    Description: PropTypes.string,
+    ImagePath: PropTypes.string
   }).isRequired
 };
