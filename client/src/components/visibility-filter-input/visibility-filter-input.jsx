@@ -11,7 +11,7 @@ import './visibility-filter-input.scss';
 function VisibilityFilterInput(props) {
   return <div className="visibility-filter-input">
     <Form.Group controlId="formBasicFilterInput" className="mb-4">
-      <Form.Control className="search" onChange={e => props.setFilter(e.target.value)} value={props.visibilityFilter.trim().toLowerCase()} placeholder="Search..." />
+      <Form.Control className="search" onChange={e => props.setFilter(e.target.value)} value={props.visibilityFilter.trim()} placeholder="Search..." />
     </Form.Group>
 
   </div>
