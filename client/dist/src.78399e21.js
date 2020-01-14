@@ -42350,11 +42350,13 @@ exports.setMovies = setMovies;
 exports.setFilter = setFilter;
 exports.setUserProfile = setUserProfile;
 exports.SET_USER_PROFILE = exports.SET_FILTER = exports.SET_MOVIES = void 0;
+// The "action" is a JS Object that describes a change that we want to make. 
+// Requirements: Object needs to have a type property, value should be a string
 var SET_MOVIES = 'SET_MOVIES';
 exports.SET_MOVIES = SET_MOVIES;
 var SET_FILTER = 'SET_FILTER';
 exports.SET_FILTER = SET_FILTER;
-var SET_USER_PROFILE = 'SET_LOGGEDIN_USER';
+var SET_USER_PROFILE = 'SET_USER_PROFILE';
 exports.SET_USER_PROFILE = SET_USER_PROFILE;
 
 function setMovies(value) {
@@ -43239,7 +43241,7 @@ function VisibilityFilterInput(props) {
     onChange: function onChange(e) {
       return props.setFilter(e.target.value);
     },
-    value: props.visibilityFilter.trim().toLowerCase(),
+    value: props.visibilityFilter.trim(),
     placeholder: "Search..."
   })));
 }
@@ -43562,7 +43564,7 @@ function MoviesList(props) {
 
   if (visibilityFilter !== '') {
     filteredMovies = movies.filter(function (m) {
-      return m.Title.toLowerCase().includes(visibilityFilter);
+      return m.Title.toLowerCase().includes(visibilityFilter.toLowerCase());
     });
   }
 
@@ -43660,8 +43662,7 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function LoginView(props) {
-  console.log(props); // Calling useState() method with empty string (= initial value of login variable)
-
+  // Calling useState() method with empty string (= initial value of login variable)
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       username = _useState2[0],
@@ -43819,7 +43820,6 @@ function RegistrationView(props) {
       Birthday: birthday
     }).then(function (response) {
       var data = response.data;
-      console.log(data);
       alert('Registration was successful. Please log in');
       window.open('/', '_self'); // with '_self' page will open in current tab
     }).catch(function (error) {
@@ -44028,7 +44028,6 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      console.log(this.props);
       var movie = this.props.movie;
       if (!movie) return null;
       return _react.default.createElement("div", {
@@ -44172,10 +44171,7 @@ function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           director = _this$props.director,
-          movies = _this$props.movies; // testing which props are available
-
-      console.log(director);
-      console.log(movies);
+          movies = _this$props.movies;
       if (!director) return null;
       return _react.default.createElement("div", {
         className: "director-view"
@@ -44308,9 +44304,7 @@ function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           genre = _this$props.genre,
-          movies = _this$props.movies,
-          movie = _this$props.movie;
-      console.log(this.props);
+          movies = _this$props.movies;
       if (!genre) return null;
       return _react.default.createElement("div", {
         className: "genre-view"
@@ -55000,11 +54994,15 @@ module.hot.accept(reloadCSS);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ProfileView = void 0;
+exports.default = exports.ProfileView = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _reactRedux = require("react-redux");
+
+var _actions = require("../../actions/actions");
 
 var _reactRouterDom = require("react-router-dom");
 
@@ -55099,12 +55097,9 @@ function (_React$Component) {
           user = _this$props.user,
           userProfile = _this$props.userProfile,
           movies = _this$props.movies;
-      console.log(user);
-      console.log(userProfile);
       var favoritesList = movies.filter(function (movie) {
         return userProfile.Favorites.includes(movie._id);
       });
-      console.log(favoritesList);
       if (!user || !userProfile || !movies || movies.length === 0) return _react.default.createElement("div", null, "loading");
       return _react.default.createElement("div", {
         className: "profile-view"
@@ -55172,6 +55167,17 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.ProfileView = ProfileView;
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    movies: state.movies,
+    userProfile: state.userProfile
+  };
+};
+
+var _default = (0, _reactRedux.connect)()(ProfileView);
+
+exports.default = _default;
 ProfileView.propTypes = {
   userProfile: _propTypes.default.shape({
     _id: _propTypes.default.string,
@@ -55199,7 +55205,7 @@ ProfileView.propTypes = {
     Actors: _propTypes.default.array
   })).isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","axios":"../node_modules/axios/index.js"}],"components/profile-view/update-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-redux":"../node_modules/react-redux/es/index.js","../../actions/actions":"actions/actions.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","axios":"../node_modules/axios/index.js"}],"components/profile-view/update-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -55240,7 +55246,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function UpdateView(props) {
   var user = props.user;
-  console.log(props);
 
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -55281,7 +55286,7 @@ function UpdateView(props) {
       localStorage.setItem('user', data.Username);
       window.open("/users/".concat(localStorage.getItem('user')));
     }).catch(function (error) {
-      alert('error updating user ' + error);
+      console.log(error), alert('error updating user ' + error);
     });
   };
 
@@ -55466,8 +55471,7 @@ function (_React$Component) {
           Authorization: "Bearer ".concat(token)
         }
       }).then(function (response) {
-        console.log(response); // #1
-
+        // #1
         _this2.props.setMovies(response.data);
       }).catch(function (error) {
         console.log(error);
@@ -55483,8 +55487,7 @@ function (_React$Component) {
           Authorization: "Bearer ".concat(token)
         }
       }).then(function (response) {
-        console.log(response); // #1 setUserProfile
-
+        // #1 setUserProfile
         _this3.props.setUserProfile(response.data);
       }).catch(function (error) {
         console.log(error);
@@ -55551,7 +55554,9 @@ function (_React$Component) {
       if (!user) {
         return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", {
           className: "main-view"
-        }, _react.default.createElement(_Container.default, {
+        }, _react.default.createElement("h1", {
+          className: "display-4 text-muted m-auto"
+        }, "Welcome to myFlix. It provides information about movies."), _react.default.createElement(_Container.default, {
           className: "container"
         }, _react.default.createElement(_Row.default, {
           className: "justify-content-center"
@@ -55696,13 +55701,22 @@ var mapStateToProps = function mapStateToProps(state) {
     movies: state.movies,
     userProfile: state.userProfile
   };
-}; // #4
+};
 
-
-var _default = (0, _reactRedux.connect)(mapStateToProps, {
+var mapDispatchToProps = {
   setMovies: _actions.setMovies,
-  setUserProfile: _actions.setUserProfile
-})(MainView);
+  setUserProfile: _actions.setUserProfile // const mapDispatchToProps = dispatch => {
+  //   return {
+  //     setMovies: () => this.dispatch(setMovies()),
+  //     setUserProfile: () => this.dispatch(setUserProfile()),
+  //     dispatch
+  //   }
+  // };
+  // #4
+
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MainView);
 
 exports.default = _default;
 MainView.propTypes = {
@@ -55744,6 +55758,8 @@ var _redux = require("redux");
 
 var _actions = require("../actions/actions");
 
+// reducer takes current state and an action as arguments and figures out the new state. 
+// state argument is assigned to a initial state at the beginning.
 function visibilityFilter() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -55889,7 +55905,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56816" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52606" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
