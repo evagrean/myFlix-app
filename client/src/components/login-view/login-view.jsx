@@ -10,7 +10,6 @@ import Col from 'react-bootstrap/Col';
 import './login-view.scss';
 
 export function LoginView(props) {
-  console.log(props);
   // Calling useState() method with empty string (= initial value of login variable)
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
