@@ -2,6 +2,10 @@ $primary-color: #522266;
 $secondary-color: #ececec;
 $font-family: 'Alegreya Sans', sans-serif;
 
+.check {
+  color: lighten( $primary-color, 60% );
+}
+
 .card-margin {
   margin-bottom: 20px;
 }

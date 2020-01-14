@@ -55554,9 +55554,13 @@ function (_React$Component) {
       if (!user) {
         return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", {
           className: "main-view"
+        }, _react.default.createElement("div", {
+          className: "bg-light d-flex"
         }, _react.default.createElement("h1", {
-          className: "display-4 text-muted m-auto"
-        }, "Welcome to myFlix. It provides information about movies."), _react.default.createElement(_Container.default, {
+          className: "d-flex pt-2 pb-2 ml-2"
+        }, "myFlix. ", _react.default.createElement("span", {
+          className: "check"
+        }, "Check out your favorite movies"))), _react.default.createElement(_Container.default, {
           className: "container"
         }, _react.default.createElement(_Row.default, {
           className: "justify-content-center"
@@ -55905,7 +55909,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52606" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61152" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

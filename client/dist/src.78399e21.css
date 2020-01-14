@@ -230,6 +230,10 @@ ul {
 .unregister-btn:hover {
   color: #903cb3;
 }
+.check {
+  color: #e4ccee;
+}
+
 .card-margin {
   margin-bottom: 20px;
 }
