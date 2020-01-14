@@ -1,10 +1,14 @@
 # myFlix-app
 
-This README contains technical and content-related details about the server-side component of the application "myFlix". 
-"myFlix" is a web application that is hosted online and provides users with access to information about different movies, directors, and genres. Users are able to sign up, update their personal information, and create a list of their favorite movies. 
+Project built as part of CareerFoundry's Full-Stack-Web-Development-Course to demonstrate the mastery of full-stack JavaScript develpoment with MERN stack.
+
+This README contains technical and content-related details about the [server-side](#Server-side) and [client-side](#Client-side) component of a React application called "myFlix". 
+The REST API for "myFlix" is hosted online on Heroku and provides logged in users with access to information about different movies, directors, and genres. For detailed information about all the provided features, see [Features](#Features) sector.
 The server-side of the application (server, business logic, business layers) consists of a REST API and architected database built using JavaScript, Node.js, Express, and MongoDB.
 
 The REST API can be accessed via commonly used HTTP methods (GET, POST, PUT, DELETE). CRUD is used to retrieve data from the database and store that data in a non-relational way.
+
+# Server-side
 
 ## Features
 
@@ -286,3 +290,70 @@ SuperMario123: 5dbc29331c8922ba13eb0361,5dbc27dc1c8922ba13eb035f
 ```
 superHero was deleted
 ```
+- - - -
+
+# Client-side
+
+The UI of myFlix is built using the React library. The interface views will handle data requested by the user through the [REST API endpoints](#Endpoints) defined above.
+
+## Technical Details
+
+**The application...**
+* is a single-page application
+* uses state routing to navigate between views and share URLs
+* gives users option to filter movies
+* gives users option to sort movies
+* initially uses Parcel as its built tool
+* is migrated to create-react-app
+* is written using React library and ES2015+
+* is written with React Redux
+* uses Bootstrap as a UI library for styling and responsiveness
+* contains a mix of class components and function components
+* is hosted online: [myFlix](https://my-flix-evagrean.herokuapp.com/client)
+
+## Essential Views and Features
+
+### Main view
+* returns a list of all movies to the user (each listed item with image, title, description)
+* sorting and filtering
+* ability to select a movie for more details
+* provides links/buttons to see profile data and to log out
+
+### Movie view
+* returns data (description, genre, director, image) about a single movie to the user
+* allows users to add a movie to their list of favorites
+
+### Login view
+* allows users to login with username and password
+* provides a link for new users registration view
+
+### Registration view
+* allows new users to sign in (username, password, email, birthday)
+
+### Genre view
+* returns data about a genre (name, description)
+* displays example movies
+
+### Director view
+* returns data about a director (name, bio, birth year, death year if existing)
+* displays example movies
+
+### Profile view
+* allows users to see their profile data (username, email, birthday)
+
+* displays favorite movies
+* allows users to remove a movie from their list of favorites
+* provides buttons to either update or delete existing account
+
+### Update profile
+* allows users to update their user info
+
+
+
+
+
+
+
+
+
+
