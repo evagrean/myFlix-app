@@ -11,9 +11,7 @@ import { Button } from 'react-bootstrap';
 import './update-view.scss';
 
 export function UpdateView(props) {
-  const { user } = props
-  console.log(props);
-
+  const { user } = props;
 
   const [username, updateUsername] = useState('');
   const [password, updatePassword] = useState('');
@@ -38,8 +36,8 @@ export function UpdateView(props) {
         window.open(`/users/${localStorage.getItem('user')}`);
       })
       .catch(error => {
-
-        alert('error updating user ' + error);
+        console.log(error),
+          alert('error updating user ' + error);
       });
 
   }

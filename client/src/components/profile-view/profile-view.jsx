@@ -1,5 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
+import { setMovies } from '../../actions/actions';
+import { setUserProfile } from '../../actions/actions';
+
 import { Link } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
@@ -61,11 +65,8 @@ export class ProfileView extends React.Component {
 
   render() {
     const { user, userProfile, movies } = this.props;
-    console.log(user);
-    console.log(userProfile)
 
     const favoritesList = movies.filter(movie => userProfile.Favorites.includes(movie._id));
-    console.log(favoritesList);
 
     if (!user || !userProfile || !movies || movies.length === 0) return <div>loading</div>;
 
@@ -126,6 +127,12 @@ export class ProfileView extends React.Component {
 
   }
 }
+
+let mapStateToProps = state => {
+  return { movies: state.movies, userProfile: state.userProfile }
+}
+
+export default connect()(ProfileView);
 
 ProfileView.propTypes = {
   userProfile: PropTypes.shape({
