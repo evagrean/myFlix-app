@@ -46,7 +46,6 @@ class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        console.log(response);
         // #1
         this.props.setMovies(response.data);
 
@@ -61,7 +60,6 @@ class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        console.log(response);
         // #1 setUserProfile
         this.props.setUserProfile(response.data);
       })
@@ -139,7 +137,10 @@ class MainView extends React.Component {
       return (
         <Router>
           <div className="main-view">
+            <h1 className="display-4 text-muted m-auto">Welcome to myFlix. It provides information about movies.</h1>
+
             <Container className="container">
+
               <Row className="justify-content-center">
                 <Col xs={11} sm={6} md={3}>
                   <Route exact path="/" render={() => < LoginView onLoggedIn={user => this.onLoggedIn(user)} />} />
@@ -203,10 +204,23 @@ class MainView extends React.Component {
 // #3
 let mapStateToProps = state => {
   return { movies: state.movies, userProfile: state.userProfile }
+};
+
+const mapDispatchToProps = {
+  setMovies,
+  setUserProfile
 }
 
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     setMovies: () => this.dispatch(setMovies()),
+//     setUserProfile: () => this.dispatch(setUserProfile()),
+//     dispatch
+//   }
+// };
+
 // #4
-export default connect(mapStateToProps, { setMovies, setUserProfile })(MainView);
+export default connect(mapStateToProps, mapDispatchToProps)(MainView);
 
 MainView.propTypes = {
   movies: PropTypes.arrayOf(
