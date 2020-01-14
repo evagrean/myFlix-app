@@ -137,11 +137,9 @@ class MainView extends React.Component {
       return (
         <Router>
           <div className="main-view">
-            <div className="bg-light d-flex">
-              <h1 className="d-flex pt-2 pb-2 ml-2">myFlix. <span className="check">Check out your favorite movies</span></h1>
+            <div className="d-flex bg-light shadow-sm p-3 mb-5">
+              <h2 className="d-flex ml-2">myFlix. <span className="check">Check out your favorite movies</span></h2>
             </div>
-
-
             <Container className="container">
 
               <Row className="justify-content-center">
