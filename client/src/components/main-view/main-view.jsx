@@ -212,14 +212,6 @@ const mapDispatchToProps = {
   setUserProfile
 }
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     setMovies: () => this.dispatch(setMovies()),
-//     setUserProfile: () => this.dispatch(setUserProfile()),
-//     dispatch
-//   }
-// };
-
 // #4
 export default connect(mapStateToProps, mapDispatchToProps)(MainView);
 

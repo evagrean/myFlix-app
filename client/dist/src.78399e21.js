@@ -55709,14 +55709,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = {
   setMovies: _actions.setMovies,
-  setUserProfile: _actions.setUserProfile // const mapDispatchToProps = dispatch => {
-  //   return {
-  //     setMovies: () => this.dispatch(setMovies()),
-  //     setUserProfile: () => this.dispatch(setUserProfile()),
-  //     dispatch
-  //   }
-  // };
-  // #4
+  setUserProfile: _actions.setUserProfile // #4
 
 };
 
@@ -55909,7 +55902,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63314" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61805" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
