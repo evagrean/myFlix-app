@@ -51,7 +51,7 @@ class MainView extends React.Component {
 
       })
       .catch(function (error) {
-        console.log(error);
+        alert('An error occured: ' + error);
       });
   }
 
@@ -64,7 +64,7 @@ class MainView extends React.Component {
         this.props.setUserProfile(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        alert('An error occured: ' + error);
       });
   }
 

@@ -30,14 +30,12 @@ export function UpdateView(props) {
     })
       .then(res => {
         const data = res.data;
-        console.log(data);
         alert('Your profile data was updated successfully');
         localStorage.setItem('user', data.Username);
         window.open(`/users/${localStorage.getItem('user')}`);
       })
       .catch(error => {
-        console.log(error),
-          alert('error updating user ' + error);
+        alert('error updating user ' + error);
       });
 
   }

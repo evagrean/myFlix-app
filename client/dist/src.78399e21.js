@@ -43218,8 +43218,6 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _reactRedux = require("react-redux");
 
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
@@ -43251,7 +43249,7 @@ var _default = (0, _reactRedux.connect)(null, {
 })(VisibilityFilterInput);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","../../actions/actions":"actions/actions.js","./visibility-filter-input.scss":"components/visibility-filter-input/visibility-filter-input.scss"}],"../node_modules/react-bootstrap/esm/divWithClassName.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","../../actions/actions":"actions/actions.js","./visibility-filter-input.scss":"components/visibility-filter-input/visibility-filter-input.scss"}],"../node_modules/react-bootstrap/esm/divWithClassName.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -43685,7 +43683,6 @@ function LoginView(props) {
 
       props.onLoggedIn(data);
     }).catch(function (error) {
-      console.log('no such user');
       return alert('Invalid username or password. Please try again');
     });
   };
@@ -43823,8 +43820,7 @@ function RegistrationView(props) {
       alert('Registration was successful. Please log in');
       window.open('/', '_self'); // with '_self' page will open in current tab
     }).catch(function (error) {
-      console.log('error register user. Username has to be at least five chars long');
-      return alert('Registration failed. Please make sure your username is at least 5 chars long');
+      return alert('Registration failed. Please make sure your username is at least 5 chars long' + error);
     });
   };
 
@@ -55281,12 +55277,11 @@ function UpdateView(props) {
       }
     }).then(function (res) {
       var data = res.data;
-      console.log(data);
       alert('Your profile data was updated successfully');
       localStorage.setItem('user', data.Username);
       window.open("/users/".concat(localStorage.getItem('user')));
     }).catch(function (error) {
-      console.log(error), alert('error updating user ' + error);
+      alert('error updating user ' + error);
     });
   };
 
@@ -55474,7 +55469,7 @@ function (_React$Component) {
         // #1
         _this2.props.setMovies(response.data);
       }).catch(function (error) {
-        console.log(error);
+        alert('An error occured: ' + error);
       });
     }
   }, {
@@ -55490,7 +55485,7 @@ function (_React$Component) {
         // #1 setUserProfile
         _this3.props.setUserProfile(response.data);
       }).catch(function (error) {
-        console.log(error);
+        alert('An error occured: ' + error);
       });
     } // One of the "hooks" available in a React Component
 
@@ -55902,7 +55897,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61805" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57793" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

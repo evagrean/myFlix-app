@@ -29,8 +29,7 @@ export function RegistrationView(props) {
         window.open('/', '_self'); // with '_self' page will open in current tab
       })
       .catch(error => {
-        console.log('error register user. Username has to be at least five chars long')
-        return alert('Registration failed. Please make sure your username is at least 5 chars long');
+        return alert('Registration failed. Please make sure your username is at least 5 chars long' + error);
       });
   };
 
