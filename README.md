@@ -309,7 +309,7 @@ The UI of myFlix is built using the React library. The interface views will hand
 * is written with React Redux
 * uses Bootstrap as a UI library for styling and responsiveness
 * contains a mix of class components and function components
-* is hosted online: [myFlix](https://my-flix-evagrean.herokuapp.com/client)
+* case study: [myFlix](https://greiner-anzenbacher.com/case.html)
 
 ## Essential Views and Features
 
